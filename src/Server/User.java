@@ -11,6 +11,8 @@ public class User {
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private String name;
+    private boolean connect;
+    User enemy = null;
 
     public User(Socket socket){
         this.socket = socket;
@@ -21,6 +23,7 @@ public class User {
         this.inputStream = inputStream;
         this.outputStream = outputStream;
         this.name = this.createName(name);
+        this.connect = false;
     }
 
     public Socket getSocket(){
@@ -36,6 +39,10 @@ public class User {
     }
 
     public  String getName(){ return this.name; }
+
+    public boolean getConnect(){ return  this.connect; }
+
+    public void setConnect(){ this.connect = true; }
 
     private String createName(String name){
 
