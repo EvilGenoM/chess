@@ -8,15 +8,17 @@ public class User {
     private Socket socket;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
+    private String name;
 
     public User(Socket socket){
         this.socket = socket;
     }
 
-    public User(Socket socket, DataInputStream inputStream, DataOutputStream outputStream){
+    public User(Socket socket, DataInputStream inputStream, DataOutputStream outputStream, String name){
         this.socket = socket;
         this.inputStream = inputStream;
         this.outputStream = outputStream;
+        this.name = name;
     }
 
     public Socket getSocket(){
@@ -28,6 +30,8 @@ public class User {
     }
 
     public DataOutputStream getOutputStream() {
-        return outputStream;
+        return this.outputStream;
     }
+
+    public  String getName(){ return this.name; }
 }
