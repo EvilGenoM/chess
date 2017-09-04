@@ -19,15 +19,21 @@ public class ClientThread extends Thread {
         try{
             DataInputStream in = new DataInputStream(this.socket.getInputStream());
             DataOutputStream out = new DataOutputStream(this.socket.getOutputStream());
-            getUserList().add(new User(this.socket, in, out));
+
+            String name = in.readUTF();
+
+            getUserList().add(new User(this.socket, in, out, name));
+
             String line = null;
+
             while(true){
                 line = in.readUTF();
                 System.out.println("Получена строка: " + line);
                 for(User user : getUserList()){
-                    user.getOutputStream().writeUTF(line);
+                    user.getOutputStream().writeUTF(user.getName() + ": " + line);
                 }
             }
+
         } catch (IOException ex){
             System.out.println(ex);
         }
