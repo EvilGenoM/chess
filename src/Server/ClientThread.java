@@ -1,3 +1,5 @@
+package Server;
+
 import java.net.Socket;
 
 public class ClientThread extends Thread {
@@ -10,7 +12,7 @@ public class ClientThread extends Thread {
     }
 
     public void run(){
-        
+
     }
 
 }
