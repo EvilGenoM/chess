@@ -6,8 +6,11 @@ import java.net.*;
 
 public class Client {
 
-    int port = 8080;
-    String adress = "127.0.0.1";
+    private int port = 8080;
+    private String adress = "127.0.0.1";
+    private DataInputStream in;
+    private DataOutputStream out;
+
 
     public static void main(String[] args) {
         Client client = new Client();
@@ -19,11 +22,9 @@ public class Client {
             Socket socket = new Socket(adress, port);
             System.out.println("Мы подключились!");
 
-            InputStream inStream = socket.getInputStream();
-            OutputStream outStream = socket.getOutputStream();
 
-            DataInputStream in = new DataInputStream(inStream);
-            DataOutputStream out = new DataOutputStream(outStream);
+            in = new DataInputStream(socket.getInputStream());
+            out = new DataOutputStream(socket.getOutputStream());
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,12 +32,12 @@ public class Client {
             System.out.println();
             String line = null;
 
+            Render render = new Render();
+            render.start();
+
             while(true){
                 line = reader.readLine();
                 out.writeUTF(line);
-                line = in.readUTF();
-                System.out.println("Text"+line);
-                System.out.println();
                 if(line.equals("exit")) break;
             }
 
@@ -48,6 +49,29 @@ public class Client {
             System.out.println(ex);
         }
     }
+
+
+    public class Render extends Thread{
+        private boolean stop;
+
+        public void setStop(){
+            this.stop = true;
+        }
+
+        @Override
+        public void run(){
+            try{
+                while (!stop) {
+                    String str = in.readUTF();
+                    System.out.println(str);
+                }
+            } catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
+    }
+
 
 
 }
