@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
+import static Server.Server.getUserList;
+
 public class User {
     private Socket socket;
     private DataInputStream inputStream;
@@ -18,7 +20,7 @@ public class User {
         this.socket = socket;
         this.inputStream = inputStream;
         this.outputStream = outputStream;
-        this.name = name;
+        this.name = this.createName(name);
     }
 
     public Socket getSocket(){
@@ -34,4 +36,20 @@ public class User {
     }
 
     public  String getName(){ return this.name; }
+
+    private String createName(String name){
+
+        String fakeName = name;
+        int i = 1;
+
+        for(User user : getUserList()){
+            if(user.name.equals(fakeName)){
+                fakeName = name + i;
+                i++;
+            }
+        }
+
+        return fakeName;
+
+    }
 }
