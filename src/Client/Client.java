@@ -28,12 +28,20 @@ public class Client {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.println("Введите имя...");
-            System.out.println();
+            System.out.println("Введите имя:");
+
+            String name = reader.readLine();
+            out.writeUTF(name);
+
+            System.out.println("Присоединится к игроку с именем:");
+
             String line = null;
 
             Render render = new Render();
             render.start();
+
+            String enemy = reader.readLine();
+            out.writeUTF(enemy);
 
             while(true){
                 line = reader.readLine();
