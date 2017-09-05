@@ -11,8 +11,10 @@ public class User {
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private String name;
-    private boolean connect;
+    private boolean connect = false;
     User enemy = null;
+    private boolean stroke = false;
+    private boolean con = true;
 
     public User(Socket socket){
         this.socket = socket;
@@ -42,7 +44,15 @@ public class User {
 
     public boolean getConnect(){ return  this.connect; }
 
-    public void setConnect(){ this.connect = true; }
+    public void setConnect(boolean connect){ this.connect = connect; }
+
+    synchronized public void setCon(boolean con){ this.con = con;}
+
+    synchronized public boolean getCon(){ return this.con;}
+
+    synchronized public void setStroke(boolean stroke){ this.stroke = stroke;}
+
+    synchronized public boolean getStroke(){ return this.stroke;}
 
     private String createName(String name){
 
