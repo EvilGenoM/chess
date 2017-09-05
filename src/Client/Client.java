@@ -20,7 +20,7 @@ public class Client {
     public Client(){
         try{
             Socket socket = new Socket(adress, port);
-            System.out.println("Мы подключились!");
+            System.out.println("Вы подключились!");
 
 
             in = new DataInputStream(socket.getInputStream());
@@ -33,20 +33,19 @@ public class Client {
             String name = reader.readLine();
             out.writeUTF(name);
 
-            System.out.println("Присоединится к игроку с именем:");
 
             String line = null;
 
             Render render = new Render();
             render.start();
 
-            String enemy = reader.readLine();
-            out.writeUTF(enemy);
 
             while(true){
+
                 line = reader.readLine();
                 out.writeUTF(line);
                 if(line.equals("exit")) break;
+
             }
 
             in.close();
