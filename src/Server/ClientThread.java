@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 import static Server.Server.getUserList;
 
@@ -11,6 +12,9 @@ public class ClientThread extends Thread {
 
     private Socket socket;
     private User enemy = null;
+    private User player = null;
+    DataInputStream in;
+    DataOutputStream out;
 
     public ClientThread(Socket socket){
         this.socket = socket;
@@ -18,39 +22,56 @@ public class ClientThread extends Thread {
 
     public void run(){
         try{
-            DataInputStream in = new DataInputStream(this.socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(this.socket.getOutputStream());
+            in = new DataInputStream(this.socket.getInputStream());
+            out = new DataOutputStream(this.socket.getOutputStream());
 
             String name = in.readUTF();
 
-            User player = new User(this.socket, in, out, name);
+            player = new User(this.socket, in, out, name);
             getUserList().add(player);
 
-            String enemy = in.readUTF();
+            this.comand();
 
-            if(player.enemy != null){
-                this.enemy = player.enemy;
-                this.enemy.getOutputStream().writeUTF(player.getName()+":" + enemy);
-            }
+        } catch (IOException ex){
+            System.out.println(ex);
+        }
+    }
 
-                while (player.getConnect() == false) {
-                    player.getOutputStream().writeUTF(connect(player, enemy));
-                    if (this.enemy != null) {
-                        player.setConnect();
-                        this.enemy.setConnect();
-                        this.enemy.enemy = player;
-                        break;
-                    }
-                    enemy = in.readUTF();
+    public void connect(String enemy) throws IOException {
+        for(User user : getUserList()){
+            if(user.getName().equals(enemy)){
+                user.getOutputStream().writeUTF("К вам подсоединился игрок  " + player.getName());
+                player.setConnect(true);
+                user.setConnect(true);
+                player.enemy = user;
+                user.enemy = player;
+                player.setStroke(true);
+                while(player.getCon()){
+
                 }
+                game(user);
+                break;
+            }
+        }
 
-            System.out.println("Player" + this.enemy.getName());
-            String line = null;
+        player.getOutputStream().writeUTF("Игрок не найден");
 
-            while(true){
-                line = in.readUTF();
-                System.out.println("Получена строка: " + line);
-                this.enemy.getOutputStream().writeUTF(player.getName() + ": " + line);
+    }
+
+    public void game(User user){
+        String line = null;
+        try{
+            player.getOutputStream().writeUTF("Началась игра");
+            while(true) {
+                if(player.getStroke() == true) {
+                    player.getOutputStream().writeUTF("Ваш ход:");
+                    line = in.readUTF();
+                    System.out.println(player.getName() + ": " + line);
+
+                    user.getOutputStream().writeUTF(player.getName() + ": " + line);
+                    player.setStroke(false);
+                    user.setStroke(true);
+                }
             }
 
         } catch (IOException ex){
@@ -58,19 +79,32 @@ public class ClientThread extends Thread {
         }
     }
 
-    public String connect(User player, String enemy) throws IOException {
-        String con = " ";
-        for(User user : getUserList()){
-            if(user.getName().equals(enemy)){
-                user.getOutputStream().writeUTF("К вам подсоединился игрок  " + player.getName());
-                this.enemy = user;
-                con = "Успех";
-                break;
+    public void comand() {
+        String line = null;
+        try{
+            while (true) {
+                line = in.readUTF();
+                System.out.println(player.getName() + ": " + line);
+
+                String comand[] = line.split(" ");
+
+                if (comand[0].equals("find")) {
+                    connect(comand[1]);
+                }
+
+                if(line.equals("Y")){
+                    player.enemy.setCon(false);
+                    game(player.enemy);
+                }
+
             }
-            con = "Неверное имя. Повторите попытку...";
+
+        } catch (IOException ex){
+            System.out.println(ex);
         }
-        return con;
+
     }
+
 
 
 }
