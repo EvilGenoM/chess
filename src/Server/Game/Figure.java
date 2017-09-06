@@ -50,6 +50,9 @@ public abstract class Figure {
     }
 
 
+    void 
+
+
 }
 
 class King extends Figure{
@@ -148,17 +151,78 @@ class Queen extends Figure{
 }
 
 class Bishop extends Figure{
+    String location;
 
-    Bishop(Map<String, Figure> board) {
+    Bishop(Map<String, Figure> board, String loc) {
         super(board);
         name = "B";
+        this.location = loc;
     }
 
     @Override
     public boolean move(String stroke){
         boolean result = false;
+        char[] element = findSymbolNumber(location);
 
-        return result;
+        strokeFigure = new ArrayList<String>();
+
+
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
+
+        while(number != 8 && sym != 'h'){
+            ++sym;
+            ++number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 8 && sym != 'a'){
+            --sym;
+            ++number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 1 && sym != 'h'){
+            ++sym;
+            --number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 1 && sym != 'a'){
+            --sym;
+            --number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+
+
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -170,19 +234,84 @@ class Bishop extends Figure{
 }
 
 class kNight extends Figure{
+    String location;
 
-    kNight(Map<String, Figure> board) {
+    kNight(Map<String, Figure> board, String loc) {
         super(board);
         name = "H";
+        this.location = loc;
     }
 
     @Override
     public boolean move(String stroke){
         boolean result = false;
+        char[] element = findSymbolNumber(location);
+
+        strokeFigure = new ArrayList<String>();
 
 
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
 
-        return result;
+        if(number <= 6){
+            sym = element[0];
+            if(element[0] != 'a') {
+                writeList(strokeFigure, "" + (--sym) + (number + 2));
+            }
+            sym = element[0];
+            if(element[0] != 'h') {
+                writeList(strokeFigure, "" + (++sym) + (number + 2));
+            }
+        }
+
+        if(number >= 3){
+            sym = element[0];
+            if(element[0] != 'a') {
+                writeList(strokeFigure, "" + (--sym) + (number - 2));
+            }
+            sym = element[0];
+            if(element[0] != 'h') {
+                writeList(strokeFigure, "" + (++sym) + (number - 2));
+            }
+        }
+
+        if(element[0] >= 'c'){
+            sym = element[0];
+            if(number != 1) {
+                --sym;
+                --sym;
+                writeList(strokeFigure, "" + (sym) + (--number));
+            }
+            sym = element[0];
+            if(number != 8) {
+                --sym;
+                --sym;
+                writeList(strokeFigure, "" + (sym) + (++number));
+            }
+        }
+
+        if(element[0] <= 'f'){
+            sym = element[0];
+            if(number != 1) {
+                ++sym;
+                ++sym;
+                writeList(strokeFigure, "" + (sym) + (--number));
+            }
+            sym = element[0];
+            if(number != 8) {
+                ++sym;
+                ++sym;
+                writeList(strokeFigure, "" + (sym) + (++number));
+            }
+        }
+
+
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -193,17 +322,68 @@ class kNight extends Figure{
 }
 
 class Rook extends Figure{
+    String location;
 
-    Rook(Map<String, Figure> board) {
+    Rook(Map<String, Figure> board, String loc) {
         super(board);
         name = "R";
+        this.location = loc;
     }
 
     @Override
     public boolean move(String stroke){
         boolean result = false;
+        char[] element = findSymbolNumber(location);
 
-        return result;
+        strokeFigure = new ArrayList<String>();
+
+
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
+
+        while(sym != 'a'){
+            --sym;
+            writeList(strokeFigure, ""+sym+number);
+            if(board.get(""+sym+number) != null){
+                break;
+            }
+        }
+
+        while(number != 1){
+            --number;
+            writeList(strokeFigure, ""+element[0]+number);
+            if(board.get(""+element[0]+number) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(sym != 'h'){
+            ++sym;
+            writeList(strokeFigure, ""+sym+number);
+            if(board.get(""+sym+number) != null){
+                break;
+            }
+        }
+
+        while(number != 8){
+            ++number;
+            writeList(strokeFigure, ""+element[0]+number);
+            if(board.get(""+element[0]+number) != null){
+                break;
+            }
+        }
+
+
+
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
