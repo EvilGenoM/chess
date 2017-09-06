@@ -5,22 +5,41 @@ import java.util.*;
 public abstract class Figure {
 
     Map<String, Figure> board;
-    ArrayList<String> strokeFigure = new ArrayList<String>();
-    private String location;
+    ArrayList<String> strokeFigure;
     public String name = "";
 
     Figure(Map<String, Figure> board){
         this.board = board;
     }
 
-    Figure(Map<String, Figure> board, String loc){
-        this.board = board;
-        this.location = loc;
-    }
-
     abstract boolean move(String stroke);
 
     abstract void attack(String stroke);
+
+
+    public boolean stroke(ArrayList<String > strokeFigure, String stroke, String location){
+        for(String str : strokeFigure){
+            if(str.equals(stroke)){
+                for(Map.Entry entry : board.entrySet()){
+                    String key = (String) entry.getKey();
+                    if(key.equals(stroke)){
+                        entry.setValue(this);
+                    }
+                    if(key.equals(location)){
+                        entry.setValue(null);
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void writeList(ArrayList<String> strokeFigure, String loc){
+            strokeFigure.add(loc);
+    }
+
 
     char[] findSymbolNumber(String stroke){
         char[] element = new char[2];
@@ -29,20 +48,73 @@ public abstract class Figure {
 
         return element;
     }
+
+
 }
 
 class King extends Figure{
+    String location;
 
-    King(Map<String, Figure> board) {
+    King(Map<String, Figure> board, String loc) {
         super(board);
         name = "K";
+        this.location = loc;
     }
 
     @Override
     public boolean move(String stroke){
         boolean result = false;
+        char[] element = findSymbolNumber(location);
 
-        return result;
+        strokeFigure = new ArrayList<String>();
+
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
+
+        if(element[1] != '1'){
+            writeList(strokeFigure, ""+element[0]+(number-1));
+            sym = element[0];
+            if(element[0] != 'a'){
+                writeList(strokeFigure, ""+(--sym) + (number-1));
+            }
+            sym = element[0];
+            if(element[0] != 'h'){
+                writeList(strokeFigure, ""+(++sym) + (number-1));
+            }
+        }
+
+        if(element[1] != '8'){
+            writeList(strokeFigure, ""+element[0] + (number+1));
+            sym = element[0];
+            if(element[0] != 'a'){
+                writeList(strokeFigure, ""+(--sym) + (number+1));
+            }
+            sym = element[0];
+            if(element[0] != 'h'){
+                writeList(strokeFigure, ""+(++sym) + (number+1));
+            }
+        }
+
+        if(element[0] != 'a'){
+            sym = element[0];
+            writeList(strokeFigure, ""+(--sym) + (number));
+        }
+
+        if(element[0] != 'h'){
+            sym = element[0];
+            writeList(strokeFigure, ""+(++sym) + (number));
+        }
+
+
+
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 
     @Override
@@ -108,6 +180,8 @@ class kNight extends Figure{
     public boolean move(String stroke){
         boolean result = false;
 
+
+
         return result;
     }
 
@@ -159,27 +233,26 @@ class Pawn extends Figure{
         char[] element = findSymbolNumber(location);
         char[] elementAtack = findSymbolNumber(stroke);
         int number = Character.getNumericValue(element[1]);
-        /*
+
         if((element[0] != 'a')
-                && (elementAtack[0] == element[0]--)
-                && (Character.getNumericValue(elementAtack[1]) == number++)
+                && (elementAtack[0] == (element[0]-1))
+                && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1])+1)
                 && (board.get(stroke) != null)){
             attack(stroke);
             return true;
         }
 
-        number--;
 
         if((element[0] != 'h')
-                && (elementAtack[0] == element[0]++)
-                && (Character.getNumericValue(elementAtack[1]) == number++)
+                && (elementAtack[0] == element[0]+1)
+                && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1])+1)
                 && (board.get(stroke) != null)){
             attack(stroke);
             return true;
         }
 
-        number--;
-        */
+        strokeFigure = new ArrayList<String >();
+
         if(element[1] != '8'){
             number++;
             if(board.get(""+element[0]+number) == null){
@@ -191,27 +264,27 @@ class Pawn extends Figure{
             return false;
         }
 
-        for(String str : strokeFigure){
-            if(str.equals(stroke)){
-                for(Map.Entry entry : board.entrySet()){
-                    String key = (String) entry.getKey();
-                    if(key.equals(stroke)){
-                        entry.setValue(this);
-                    }
-                    if(key.equals(location)){
-                        entry.setValue(null);
-                    }
-                }
-                this.location = str;
-                return true;
-            }
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
         }
-
-        return result;
     }
+
 
     @Override
     public void attack(String stroke){
+        for(Map.Entry entry : board.entrySet()){
+            String key = (String) entry.getKey();
+            if(key.equals(stroke)){
+                entry.setValue(this);
+            }
+            if(key.equals(location)){
+                entry.setValue(null);
+            }
+        }
+        this.location = stroke;
 
     }
 
