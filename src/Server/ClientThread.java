@@ -1,9 +1,13 @@
 package Server;
 
+import Server.Game.ChessBoard;
+import Server.Game.Figure;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Map;
 import java.util.Scanner;
 
 import static Server.Server.getUserList;
@@ -45,6 +49,8 @@ public class ClientThread extends Thread {
                 user.setConnect(true);
                 player.enemy = user;
                 user.enemy = player;
+                ChessBoard board = new ChessBoard();
+                player.setChessBoard(board);
                 player.setStroke(true);
                 while(player.getCon()){
 
@@ -67,6 +73,51 @@ public class ClientThread extends Thread {
                     player.getOutputStream().writeUTF("Ваш ход:");
                     line = in.readUTF();
                     System.out.println(player.getName() + ": " + line);
+
+
+                    if(line.equals("board")){
+                        line = "  ";
+                        char a = 'a';
+
+                        for(int i = 0; i<8; i++){
+                            line += a+" ";
+                            a++;
+                        }
+                        line += "\n8 ";
+                        int num = 1;
+                        int numVisible = 8;
+                        for(Map.Entry entry : player.getChessBoard().board.entrySet()){
+                            Figure figure = (Figure) entry.getValue();
+                            if(figure != null) {
+                                line += figure.name + " ";
+                            } else {
+                                line += "o ";
+                            }
+                            num++;
+                            if(num == 9){
+                                num = 1;
+                                if(numVisible == 1){
+                                    line += "\n  ";
+                                    a = 'a';
+                                    for(int i = 0; i<8; i++){
+                                        line += ""+a+" ";
+                                        a++;
+                                    }
+                                } else {
+                                    line += "\n" + (--numVisible) + " ";
+                                }
+                            }
+                        }
+                        player.getOutputStream().writeUTF(line);
+                        continue;
+                    }
+
+                    if(player.getChessBoard().strokeFigure(line)){
+                        player.getOutputStream().writeUTF("Успех");
+                    } else {
+                        player.getOutputStream().writeUTF("Ошибка");
+                        continue;
+                    }
 
                     user.getOutputStream().writeUTF(player.getName() + ": " + line);
                     player.setStroke(false);
@@ -94,6 +145,7 @@ public class ClientThread extends Thread {
 
                 if(line.equals("Y")){
                     player.enemy.setCon(false);
+                    player.setChessBoard(player.enemy.getChessBoard());
                     game(player.enemy);
                 }
 
