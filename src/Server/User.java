@@ -1,5 +1,7 @@
 package Server;
 
+import Server.Game.ChessBoard;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -15,6 +17,7 @@ public class User {
     User enemy = null;
     private boolean stroke = false;
     private boolean con = true;
+    private ChessBoard board;
 
     public User(Socket socket){
         this.socket = socket;
@@ -53,6 +56,10 @@ public class User {
     synchronized public void setStroke(boolean stroke){ this.stroke = stroke;}
 
     synchronized public boolean getStroke(){ return this.stroke;}
+
+    synchronized public void setChessBoard(ChessBoard board){ this.board = board;}
+
+    synchronized public ChessBoard getChessBoard(){ return this.board;}
 
     private String createName(String name){
 
