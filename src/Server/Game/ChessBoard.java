@@ -9,14 +9,14 @@ public class ChessBoard {
     public ChessBoard(){
 
         // Ряд 8
-        board.put("a8", new Rook(board));
-        board.put("b8", new kNight(board));
-        board.put("c8", new Bishop(board));
+        board.put("a8", new Rook(board, "a8"));
+        board.put("b8", new kNight(board, "b8"));
+        board.put("c8", new Bishop(board, "c8"));
         board.put("d8", new Queen(board));
         board.put("e8", new King(board, "e8"));
-        board.put("f8", new Bishop(board));
-        board.put("g8", new kNight(board));
-        board.put("h8", new Rook(board));
+        board.put("f8", new Bishop(board, "f8"));
+        board.put("g8", new kNight(board, "b8"));
+        board.put("h8", new Rook(board, "h8"));
         // Ряд 7
         board.put("a7", new Pawn(board, "a7"));
         board.put("b7", new Pawn(board, "b7"));
@@ -72,14 +72,14 @@ public class ChessBoard {
         board.put("g2", new Pawn(board, "g2"));
         board.put("h2", new Pawn(board, "h2"));
         // Ряд 1
-        board.put("a1", new Rook(board));
-        board.put("b1", new kNight(board));
-        board.put("c1", new Bishop(board));
+        board.put("a1", new Rook(board, "a1"));
+        board.put("b1", new kNight(board, "b1"));
+        board.put("c1", new Bishop(board, "c1"));
         board.put("d1", new Queen(board));
         board.put("e1", new King(board, "e1"));
-        board.put("f1", new Bishop(board));
-        board.put("g1", new kNight(board));
-        board.put("h1", new Rook(board));
+        board.put("f1", new Bishop(board, "f1"));
+        board.put("g1", new kNight(board, "g1"));
+        board.put("h1", new Rook(board, "h1"));
 
         /*
         Pawn pawn = new Pawn(board, "a1");
