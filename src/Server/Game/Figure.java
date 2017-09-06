@@ -4,6 +4,9 @@ import java.util.*;
 
 public abstract class Figure {
 
+    public static final String ANSI_RED = "\u001B[31m";
+    
+
     Map<String, Figure> board;
     ArrayList<String> strokeFigure;
     public String name = "";
@@ -50,7 +53,97 @@ public abstract class Figure {
     }
 
 
-    void 
+    public void strokeDiagonal(ArrayList<String> strokeFigure, char[] element){
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
+        while(number != 8 && sym != 'h'){
+            ++sym;
+            ++number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 8 && sym != 'a'){
+            --sym;
+            ++number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 1 && sym != 'h'){
+            ++sym;
+            --number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(number != 1 && sym != 'a'){
+            --sym;
+            --number;
+            writeList(strokeFigure, ""+(sym)+(number));
+            if(board.get(""+(sym)+(number)) != null){
+                break;
+            }
+        }
+
+    }
+
+
+    public void strokeLine(ArrayList<String> strokeFigure, char[] element){
+
+        int number = Character.getNumericValue(element[1]);
+        char sym = element[0];
+
+        while(sym != 'a'){
+            --sym;
+            writeList(strokeFigure, ""+sym+number);
+            if(board.get(""+sym+number) != null){
+                break;
+            }
+        }
+
+        while(number != 1){
+            --number;
+            writeList(strokeFigure, ""+element[0]+number);
+            if(board.get(""+element[0]+number) != null){
+                break;
+            }
+        }
+
+        number = Character.getNumericValue(element[1]);
+        sym = element[0];
+
+        while(sym != 'h'){
+            ++sym;
+            writeList(strokeFigure, ""+sym+number);
+            if(board.get(""+sym+number) != null){
+                break;
+            }
+        }
+
+        while(number != 8){
+            ++number;
+            writeList(strokeFigure, ""+element[0]+number);
+            if(board.get(""+element[0]+number) != null){
+                break;
+            }
+        }
+    }
 
 
 }
@@ -130,16 +223,33 @@ class King extends Figure{
 
 class Queen extends Figure{
 
-    Queen(Map<String, Figure> board) {
+    String location;
+
+    Queen(Map<String, Figure> board, String loc) {
         super(board);
         name = "Q";
+        this.location = loc;
     }
 
     @Override
     public boolean move(String stroke){
         boolean result = false;
+        char[] element = findSymbolNumber(location);
 
-        return result;
+        strokeFigure = new ArrayList<String>();
+
+
+        strokeLine(strokeFigure, element);
+        strokeDiagonal(strokeFigure, element);
+
+
+
+        if(stroke(strokeFigure, stroke, location)) {
+            this.location = stroke;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -170,50 +280,7 @@ class Bishop extends Figure{
         int number = Character.getNumericValue(element[1]);
         char sym = element[0];
 
-        while(number != 8 && sym != 'h'){
-            ++sym;
-            ++number;
-            writeList(strokeFigure, ""+(sym)+(number));
-            if(board.get(""+(sym)+(number)) != null){
-                break;
-            }
-        }
-
-        number = Character.getNumericValue(element[1]);
-        sym = element[0];
-
-        while(number != 8 && sym != 'a'){
-            --sym;
-            ++number;
-            writeList(strokeFigure, ""+(sym)+(number));
-            if(board.get(""+(sym)+(number)) != null){
-                break;
-            }
-        }
-
-        number = Character.getNumericValue(element[1]);
-        sym = element[0];
-
-        while(number != 1 && sym != 'h'){
-            ++sym;
-            --number;
-            writeList(strokeFigure, ""+(sym)+(number));
-            if(board.get(""+(sym)+(number)) != null){
-                break;
-            }
-        }
-
-        number = Character.getNumericValue(element[1]);
-        sym = element[0];
-
-        while(number != 1 && sym != 'a'){
-            --sym;
-            --number;
-            writeList(strokeFigure, ""+(sym)+(number));
-            if(board.get(""+(sym)+(number)) != null){
-                break;
-            }
-        }
+        strokeDiagonal(strokeFigure, element);
 
 
 
@@ -338,43 +405,7 @@ class Rook extends Figure{
         strokeFigure = new ArrayList<String>();
 
 
-        int number = Character.getNumericValue(element[1]);
-        char sym = element[0];
-
-        while(sym != 'a'){
-            --sym;
-            writeList(strokeFigure, ""+sym+number);
-            if(board.get(""+sym+number) != null){
-                break;
-            }
-        }
-
-        while(number != 1){
-            --number;
-            writeList(strokeFigure, ""+element[0]+number);
-            if(board.get(""+element[0]+number) != null){
-                break;
-            }
-        }
-
-        number = Character.getNumericValue(element[1]);
-        sym = element[0];
-
-        while(sym != 'h'){
-            ++sym;
-            writeList(strokeFigure, ""+sym+number);
-            if(board.get(""+sym+number) != null){
-                break;
-            }
-        }
-
-        while(number != 8){
-            ++number;
-            writeList(strokeFigure, ""+element[0]+number);
-            if(board.get(""+element[0]+number) != null){
-                break;
-            }
-        }
+        strokeLine(strokeFigure, element);
 
 
 
