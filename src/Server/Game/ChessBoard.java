@@ -13,7 +13,7 @@ public class ChessBoard {
         board.put("b8", new kNight(board));
         board.put("c8", new Bishop(board));
         board.put("d8", new Queen(board));
-        board.put("e8", new King(board));
+        board.put("e8", new King(board, "e8"));
         board.put("f8", new Bishop(board));
         board.put("g8", new kNight(board));
         board.put("h8", new Rook(board));
@@ -76,7 +76,7 @@ public class ChessBoard {
         board.put("b1", new kNight(board));
         board.put("c1", new Bishop(board));
         board.put("d1", new Queen(board));
-        board.put("e1", new King(board));
+        board.put("e1", new King(board, "e1"));
         board.put("f1", new Bishop(board));
         board.put("g1", new kNight(board));
         board.put("h1", new Rook(board));
