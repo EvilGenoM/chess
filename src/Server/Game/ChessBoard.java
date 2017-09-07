@@ -2,6 +2,10 @@ package Server.Game;
 
 import java.util.*;
 
+import static Server.Game.Figure.ANSI_GREEN;
+import static Server.Game.Figure.ANSI_RED;
+import static Server.Game.Figure.ANSI_RESET;
+
 public class ChessBoard {
 
     public Map<String, Figure> board = new LinkedHashMap<String, Figure>();
@@ -9,23 +13,23 @@ public class ChessBoard {
     public ChessBoard(){
 
         // Ряд 8
-        board.put("a8", new Rook(board, "a8"));
-        board.put("b8", new kNight(board, "b8"));
-        board.put("c8", new Bishop(board, "c8"));
-        board.put("d8", new Queen(board,"d8"));
-        board.put("e8", new King(board, "e8"));
-        board.put("f8", new Bishop(board, "f8"));
-        board.put("g8", new kNight(board, "b8"));
-        board.put("h8", new Rook(board, "h8"));
+        board.put("a8", new Rook(board, "a8", false));
+        board.put("b8", new kNight(board, "b8", false));
+        board.put("c8", new Bishop(board, "c8", false));
+        board.put("d8", new Queen(board,"d8", false));
+        board.put("e8", new King(board, "e8", false));
+        board.put("f8", new Bishop(board, "f8", false));
+        board.put("g8", new kNight(board, "b8", false));
+        board.put("h8", new Rook(board, "h8", false));
         // Ряд 7
-        board.put("a7", new Pawn(board, "a7"));
-        board.put("b7", new Pawn(board, "b7"));
-        board.put("c7", new Pawn(board, "c7"));
-        board.put("d7", new Pawn(board, "d7"));
-        board.put("e7", new Pawn(board, "e7"));
-        board.put("f7", new Pawn(board, "f7"));
-        board.put("g7", new Pawn(board, "g7"));
-        board.put("h7", new Pawn(board, "h7"));
+        board.put("a7", new Pawn(board, "a7", false));
+        board.put("b7", new Pawn(board, "b7", false));
+        board.put("c7", new Pawn(board, "c7", false));
+        board.put("d7", new Pawn(board, "d7", false));
+        board.put("e7", new Pawn(board, "e7", false));
+        board.put("f7", new Pawn(board, "f7", false));
+        board.put("g7", new Pawn(board, "g7", false));
+        board.put("h7", new Pawn(board, "h7", false));
         // Ряд 6
         board.put("a6", null);
         board.put("b6", null);
@@ -63,47 +67,61 @@ public class ChessBoard {
         board.put("g3", null);
         board.put("h3", null);
         // Ряд 2
-        board.put("a2", new Pawn(board, "a2"));
-        board.put("b2", new Pawn(board, "b2"));
-        board.put("c2", new Pawn(board, "c2"));
-        board.put("d2", new Pawn(board, "d2"));
-        board.put("e2", new Pawn(board, "e2"));
-        board.put("f2", new Pawn(board, "f2"));
-        board.put("g2", new Pawn(board, "g2"));
-        board.put("h2", new Pawn(board, "h2"));
+        board.put("a2", new Pawn(board, "a2", true));
+        board.put("b2", new Pawn(board, "b2", true));
+        board.put("c2", new Pawn(board, "c2", true));
+        board.put("d2", new Pawn(board, "d2", true));
+        board.put("e2", new Pawn(board, "e2", true));
+        board.put("f2", new Pawn(board, "f2", true));
+        board.put("g2", new Pawn(board, "g2", true));
+        board.put("h2", new Pawn(board, "h2", true));
         // Ряд 1
-        board.put("a1", new Rook(board, "a1"));
-        board.put("b1", new kNight(board, "b1"));
-        board.put("c1", new Bishop(board, "c1"));
-        board.put("d1", new Queen(board, "d1"));
-        board.put("e1", new King(board, "e1"));
-        board.put("f1", new Bishop(board, "f1"));
-        board.put("g1", new kNight(board, "g1"));
-        board.put("h1", new Rook(board, "h1"));
+        board.put("a1", new Rook(board, "a1", true));
+        board.put("b1", new kNight(board, "b1", true));
+        board.put("c1", new Bishop(board, "c1", true));
+        board.put("d1", new Queen(board, "d1", true));
+        board.put("e1", new King(board, "e1", true));
+        board.put("f1", new Bishop(board, "f1", true));
+        board.put("g1", new kNight(board, "g1", true));
+        board.put("h1", new Rook(board, "h1", true));
 
-        /*
-        Pawn pawn = new Pawn(board, "a1");
 
-        board.put("a1", pawn);
-        board.put("a2", null);
-        board.put("a3", null);
-        board.put("a4", null);
-        */
     }
 
-    public boolean strokeFigure(String stroke){
+    public boolean strokeFigure(String stroke, boolean white){
 
-        boolean result = false;
 
         String str[] = stroke.split(" ");
         Figure figure = board.get(str[0]);
-        if(figure == null){
+        if(figure == null || white != figure.getWhite()){
             return false;
         }
 
-        result = figure.move(str[1]);
 
-        return result;
+        return figure.move(str[1]);
+    }
+
+    public String gameEnd(){
+        boolean white = false;
+        boolean black = false;
+        for(Map.Entry entry : board.entrySet()){
+            Figure figure = (Figure) entry.getValue();
+            if(figure != null && figure.name.equals(ANSI_GREEN+"K"+ANSI_RESET)){
+                white = true;
+            }
+            if(figure != null && figure.name.equals(ANSI_RED+"K"+ANSI_RESET)){
+                black = true;
+            }
+        }
+        if(white && black){
+            return "";
+        } else {
+            if(white){
+                return "Победили белые фигуры";
+            } else {
+                return "Победили черные фигуры";
+            }
+        }
     }
 
 }
