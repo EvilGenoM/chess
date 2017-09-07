@@ -4,16 +4,24 @@ import java.util.*;
 
 public abstract class Figure {
 
+    public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-    
+    public static final String ANSI_GREEN = "\u001B[32m";
+
 
     Map<String, Figure> board;
     ArrayList<String> strokeFigure;
     public String name = "";
+    private boolean white;
 
-    Figure(Map<String, Figure> board){
+    Figure(Map<String, Figure> board, boolean white){
         this.board = board;
+        this.white = white;
     }
+
+    public void setWhite(boolean white){ this.white = white; }
+
+    public boolean getWhite(){ return this.white; }
 
     abstract boolean move(String stroke);
 
@@ -40,7 +48,9 @@ public abstract class Figure {
 
 
     public void writeList(ArrayList<String> strokeFigure, String loc){
+        if(board.get(loc).white != this.white) {
             strokeFigure.add(loc);
+        }
     }
 
 
@@ -151,10 +161,14 @@ public abstract class Figure {
 class King extends Figure{
     String location;
 
-    King(Map<String, Figure> board, String loc) {
-        super(board);
-        name = "K";
+    King(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         this.location = loc;
+        if(white){
+            name = ANSI_GREEN+"K"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"K"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -225,10 +239,14 @@ class Queen extends Figure{
 
     String location;
 
-    Queen(Map<String, Figure> board, String loc) {
-        super(board);
-        name = "Q";
+    Queen(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         this.location = loc;
+        if(white){
+            name = ANSI_GREEN+"Q"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"Q"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -263,10 +281,14 @@ class Queen extends Figure{
 class Bishop extends Figure{
     String location;
 
-    Bishop(Map<String, Figure> board, String loc) {
-        super(board);
-        name = "B";
+    Bishop(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         this.location = loc;
+        if(white){
+            name = ANSI_GREEN+"B"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"B"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -303,10 +325,14 @@ class Bishop extends Figure{
 class kNight extends Figure{
     String location;
 
-    kNight(Map<String, Figure> board, String loc) {
-        super(board);
-        name = "H";
+    kNight(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         this.location = loc;
+        if(white){
+            name = ANSI_GREEN+"H"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"H"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -391,10 +417,14 @@ class kNight extends Figure{
 class Rook extends Figure{
     String location;
 
-    Rook(Map<String, Figure> board, String loc) {
-        super(board);
-        name = "R";
+    Rook(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         this.location = loc;
+        if(white){
+            name = ANSI_GREEN+"R"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"R"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -431,11 +461,15 @@ class Pawn extends Figure{
     private boolean one;
     private String location;
 
-    Pawn(Map<String, Figure> board, String loc) {
-        super(board);
+    Pawn(Map<String, Figure> board, String loc, boolean white) {
+        super(board, white);
         one = true;
         location = loc;
-        name = "P";
+        if(white){
+            name = ANSI_GREEN+"P"+ANSI_RESET;
+        }else {
+            name = ANSI_RED+"P"+ANSI_RESET;
+        }
     }
 
     @Override
@@ -445,41 +479,110 @@ class Pawn extends Figure{
         char[] elementAtack = findSymbolNumber(stroke);
         int number = Character.getNumericValue(element[1]);
 
-        if((element[0] != 'a')
-                && (elementAtack[0] == (element[0]-1))
-                && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1])+1)
-                && (board.get(stroke) != null)){
-            attack(stroke);
-            return true;
-        }
+        if(this.getWhite()) {
 
 
-        if((element[0] != 'h')
-                && (elementAtack[0] == element[0]+1)
-                && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1])+1)
-                && (board.get(stroke) != null)){
-            attack(stroke);
-            return true;
-        }
 
-        strokeFigure = new ArrayList<String >();
+            if ((element[0] != 'a')
+                    && (elementAtack[0] == (element[0] - 1))
+                    && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1]) + 1)
+                    && (board.get(stroke) != null)) {
+                attack(stroke);
+                one = false;
+                return true;
+            }
 
-        if(element[1] != '8'){
-            number++;
-            if(board.get(""+element[0]+number) == null){
-                strokeFigure.add(""+element[0]+number);
+
+            if ((element[0] != 'h')
+                    && (elementAtack[0] == element[0] + 1)
+                    && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1]) + 1)
+                    && (board.get(stroke) != null)) {
+                attack(stroke);
+                one = false;
+                return true;
+            }
+
+            strokeFigure = new ArrayList<String>();
+
+            if (element[1] != '8') {
+                number++;
+                if (board.get("" + element[0] + number) == null) {
+                    strokeFigure.add("" + element[0] + number);
+                } else {
+                    return false;
+                }
+                if(one){
+                    ++number;
+                    if (board.get("" + element[0] + number) == null) {
+                        strokeFigure.add("" + element[0] + number);
+                    }
+                }
             } else {
                 return false;
             }
-        } else {
-            return false;
-        }
 
-        if(stroke(strokeFigure, stroke, location)) {
-            this.location = stroke;
-            return true;
+            if (stroke(strokeFigure, stroke, location)) {
+                this.location = stroke;
+                one = false;
+                return true;
+            } else {
+                return false;
+            }
+
+
+
         } else {
-            return false;
+
+
+
+            if ((element[0] != 'a')
+                    && (elementAtack[0] == (element[0] - 1))
+                    && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1]) - 1)
+                    && (board.get(stroke) != null)) {
+                attack(stroke);
+                one = false;
+                return true;
+            }
+
+
+            if ((element[0] != 'h')
+                    && (elementAtack[0] == element[0] + 1)
+                    && (Character.getNumericValue(elementAtack[1]) == Character.getNumericValue(element[1]) - 1)
+                    && (board.get(stroke) != null)) {
+                attack(stroke);
+                one = false;
+                return true;
+            }
+
+            strokeFigure = new ArrayList<String>();
+
+            if (element[1] != '1') {
+                --number;
+                if (board.get("" + element[0] + number) == null) {
+                    strokeFigure.add("" + element[0] + number);
+                } else {
+                    return false;
+                }
+                if(one){
+                    --number;
+                    if (board.get("" + element[0] + number) == null) {
+                        strokeFigure.add("" + element[0] + number);
+                    }
+                }
+            } else {
+                return false;
+            }
+
+            if (stroke(strokeFigure, stroke, location)) {
+                this.location = stroke;
+                one = false;
+                return true;
+            } else {
+                return false;
+            }
+
+
+
         }
     }
 
