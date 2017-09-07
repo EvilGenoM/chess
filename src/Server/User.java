@@ -18,6 +18,7 @@ public class User {
     private boolean stroke = false;
     private boolean con = true;
     private ChessBoard board;
+    private boolean white;
 
     public User(Socket socket){
         this.socket = socket;
@@ -60,6 +61,10 @@ public class User {
     synchronized public void setChessBoard(ChessBoard board){ this.board = board;}
 
     synchronized public ChessBoard getChessBoard(){ return this.board;}
+
+    synchronized public void setWhite(boolean white){ this.white = white;}
+
+    synchronized public boolean getWhite(){ return this.white;}
 
     private String createName(String name){
 
