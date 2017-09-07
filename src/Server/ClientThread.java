@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import static Server.Server.getUserList;
@@ -50,8 +51,9 @@ public class ClientThread extends Thread {
                 player.enemy = user;
                 user.enemy = player;
                 ChessBoard board = new ChessBoard();
+                player.setWhite(whoWhite());
                 player.setChessBoard(board);
-                player.setStroke(true);
+                player.setStroke(player.getWhite());
                 while(player.getCon()){
 
                 }
@@ -68,12 +70,18 @@ public class ClientThread extends Thread {
         String line = null;
         try{
             player.getOutputStream().writeUTF("Началась игра");
+            if(player.getWhite()){
+                player.getOutputStream().writeUTF("Ваши белые фигуры(желтые)");
+            } else {
+                player.getOutputStream().writeUTF("Ваши черные фигуры(красные)");
+            }
             while(true) {
                 if(player.getStroke() == true) {
                     player.getOutputStream().writeUTF("Ваш ход:");
                     line = in.readUTF();
                     System.out.println(player.getName() + ": " + line);
 
+                    if(line.equals("close")) break;
 
                     if(line.equals("board")){
                         line = "  ";
@@ -112,7 +120,7 @@ public class ClientThread extends Thread {
                         continue;
                     }
 
-                    if(player.getChessBoard().strokeFigure(line)){
+                    if(player.getChessBoard().strokeFigure(line, player.getWhite())){
                         player.getOutputStream().writeUTF("Успех");
                     } else {
                         player.getOutputStream().writeUTF("Ошибка");
@@ -120,6 +128,12 @@ public class ClientThread extends Thread {
                     }
 
                     user.getOutputStream().writeUTF(player.getName() + ": " + line);
+                    String end = player.getChessBoard().gameEnd();
+                    if(!(end.equals(""))){
+                        player.getOutputStream().writeUTF(end);
+                        user.getOutputStream().writeUTF(end);
+                        break;
+                    }
                     player.setStroke(false);
                     user.setStroke(true);
                 }
@@ -145,6 +159,8 @@ public class ClientThread extends Thread {
 
                 if(line.equals("Y")){
                     player.enemy.setCon(false);
+                    player.setWhite(!player.enemy.getWhite());
+                    player.setStroke(!player.enemy.getStroke());
                     player.setChessBoard(player.enemy.getChessBoard());
                     game(player.enemy);
                 }
@@ -157,6 +173,10 @@ public class ClientThread extends Thread {
 
     }
 
+
+    synchronized private boolean whoWhite(){
+        return new Random().nextBoolean();
+    }
 
 
 }
