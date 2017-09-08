@@ -11,14 +11,16 @@ public class Figure {
     Map<String, Figure> board;
     ArrayList<String> strokeFigure;
     public String name = "";
-    public String location;
+    private String location;
     private boolean white;
     private boolean oneStroke = true;
+    private Stroke strokeHandle;
 
     Figure(Map<String, Figure> board, String location, boolean white){
         this.board = board;
         this.location = location;
         this.white = white;
+        strokeHandle = new Stroke(board);
     }
 
 
@@ -33,7 +35,6 @@ public class Figure {
 
         strokeFigure = new ArrayList<String>();
 
-        Stroke strokeHandle = new Stroke(board);
 
         strokeHandle.createListStrokes(strokeFigure, nameCell, this);
 
@@ -52,7 +53,7 @@ public class Figure {
     }
 
 
-    char[] findSymbolNumber(String stroke){
+    private char[] findSymbolNumber(String stroke){
         char[] element = new char[2];
         element[0] = stroke.charAt(0);
         element[1] = stroke.charAt(1);
