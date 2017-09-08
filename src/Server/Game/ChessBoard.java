@@ -124,4 +124,44 @@ public class ChessBoard {
         }
     }
 
+    public String viewBoard(){
+        String line = "  ";
+        char a = 'a';
+
+        for(int i = 0; i<8; i++){
+            line += a+" ";
+            a++;
+        }
+        line += "\n8 ";
+        int num = 1;
+        int numVisible = 8;
+        for(Map.Entry entry : board.entrySet()){
+            Figure figure = (Figure) entry.getValue();
+            if(figure != null) {
+                line += figure.name + " ";
+            } else {
+                line += "o ";
+            }
+            num++;
+            if(num == 9){
+                num = 1;
+                if(numVisible == 1){
+                    line += "\n  ";
+                    a = 'a';
+                    for(int i = 0; i<8; i++){
+                        line += ""+a+" ";
+                            a++;
+                        }
+                } else {
+                    line += "\n" + (--numVisible) + " ";
+                }
+            }
+        }
+        return line;
+    }
+
+    public synchronized boolean whoWhite(){
+        return new Random().nextBoolean();
+    }
+
 }
