@@ -1,17 +1,14 @@
 package Server;
 
 import Server.Game.ChessBoard;
-import Server.Game.Figure;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
 
 import static Server.Server.getUserList;
+import static java.lang.System.currentTimeMillis;
 
 public class ClientThread extends Thread {
 
@@ -38,38 +35,53 @@ public class ClientThread extends Thread {
             this.comand();
 
         } catch (IOException ex){
+            getUserList().remove(player);
             System.out.println(ex);
         }
     }
 
-    public void connect(String enemy) throws IOException {
+    private boolean connect(String enemy) throws IOException {
         for(User user : getUserList()){
-            if(user.getName().equals(enemy)){
-                user.getOutputStream().writeUTF("К вам подсоединился игрок  " + player.getName());
+            if(user.getName().equals(enemy) && user.getConnect() == false){
+                player.getOutputStream().writeUTF("Ожидайте ответа...");
+                user.getOutputStream().writeUTF("Вам предложил поиграть игрок " + player.getName()+" Введите [Y/N]");
                 player.setConnect(true);
                 user.setConnect(true);
                 player.enemy = user;
                 user.enemy = player;
                 ChessBoard board = new ChessBoard();
-                player.setWhite(whoWhite());
+                player.setWhite(board.whoWhite());
                 player.setChessBoard(board);
                 player.setStroke(player.getWhite());
+                long time = currentTimeMillis();
                 while(player.getCon()){
-
+                    if(currentTimeMillis() - time > 20000){
+                        unconnect(user);
+                        return false;
+                    }
                 }
                 game(user);
-                break;
+                player.setCon(false);
+                return true;
             }
         }
 
-        player.getOutputStream().writeUTF("Игрок не найден");
+        return false;
 
     }
 
-    public void game(User user){
+    synchronized private void unconnect(User enemy){
+        player.setConnect(false);
+        enemy.setConnect(false);
+        player.enemy = null;
+        enemy.enemy = null;
+    }
+
+    private void game(User enemy){
         String line = null;
         try{
             player.getOutputStream().writeUTF("Началась игра");
+            player.getOutputStream().writeUTF(listCommandGame());
             if(player.getWhite()){
                 player.getOutputStream().writeUTF("Ваши белые фигуры(желтые)");
             } else {
@@ -81,102 +93,134 @@ public class ClientThread extends Thread {
                     line = in.readUTF();
                     System.out.println(player.getName() + ": " + line);
 
-                    if(line.equals("close")) break;
+                    if(line.equals("close")) {
+                        unconnect(enemy);
+                        enemy.getOutputStream().writeUTF("Вы победили! Игрок "+player.getName()+" сдался!");
+                        player.getOutputStream().writeUTF("Вы сдались! Игрок"+enemy.getName()+" победил!");
+                        break;
+                    }
 
                     if(line.equals("board")){
-                        line = "  ";
-                        char a = 'a';
-
-                        for(int i = 0; i<8; i++){
-                            line += a+" ";
-                            a++;
-                        }
-                        line += "\n8 ";
-                        int num = 1;
-                        int numVisible = 8;
-                        for(Map.Entry entry : player.getChessBoard().board.entrySet()){
-                            Figure figure = (Figure) entry.getValue();
-                            if(figure != null) {
-                                line += figure.name + " ";
-                            } else {
-                                line += "o ";
-                            }
-                            num++;
-                            if(num == 9){
-                                num = 1;
-                                if(numVisible == 1){
-                                    line += "\n  ";
-                                    a = 'a';
-                                    for(int i = 0; i<8; i++){
-                                        line += ""+a+" ";
-                                        a++;
-                                    }
-                                } else {
-                                    line += "\n" + (--numVisible) + " ";
-                                }
-                            }
-                        }
+                        line = player.getChessBoard().viewBoard();
                         player.getOutputStream().writeUTF(line);
                         continue;
                     }
 
-                    if(player.getChessBoard().strokeFigure(line, player.getWhite())){
+                    if(line.equals("figure")) {
+                        player.getOutputStream().writeUTF(line);
+                        continue;
+                    }
+
+                    boolean resultStroke = player.getChessBoard().strokeFigure(line, player.getWhite());
+                    if(resultStroke){
                         player.getOutputStream().writeUTF("Успех");
                     } else {
                         player.getOutputStream().writeUTF("Ошибка");
                         continue;
                     }
 
-                    user.getOutputStream().writeUTF(player.getName() + ": " + line);
+                    enemy.getOutputStream().writeUTF(player.getName() + ": " + line);
                     String end = player.getChessBoard().gameEnd();
                     if(!(end.equals(""))){
                         player.getOutputStream().writeUTF(end);
-                        user.getOutputStream().writeUTF(end);
+                        enemy.getOutputStream().writeUTF(end);
+                        unconnect(enemy);
                         break;
                     }
                     player.setStroke(false);
-                    user.setStroke(true);
+                    enemy.setStroke(true);
+                }
+                if(player.getConnect() == false){
+                    player.setCon(false);
+                    player.getOutputStream().writeUTF("Разрыв соединения...");
+                    break;
                 }
             }
 
         } catch (IOException ex){
             System.out.println(ex);
+            unconnect(player.enemy);
         }
     }
 
-    public void comand() {
+    private void comand() {
         String line = null;
         try{
+            player.getOutputStream().writeUTF(listCommand());
             while (true) {
                 line = in.readUTF();
                 System.out.println(player.getName() + ": " + line);
 
                 String comand[] = line.split(" ");
 
-                if (comand[0].equals("find")) {
-                    connect(comand[1]);
-                }
+                if(line.equals("help")){ player.getOutputStream().writeUTF(listCommand()); continue;}
 
-                if(line.equals("Y")){
-                    player.enemy.setCon(false);
-                    player.setWhite(!player.enemy.getWhite());
-                    player.setStroke(!player.enemy.getStroke());
-                    player.setChessBoard(player.enemy.getChessBoard());
-                    game(player.enemy);
-                }
+                if (comand[0].equals("join") && comand[1] != null) { connectPlayer(comand[1]); continue;}
+
+                if(line.equals("players")){ listPlayers(); continue;}
+
+                if(line.equals("Y")){ confirmConnect(); continue;}
 
             }
 
+        } catch (IOException ex){
+            System.out.println(ex);
+            getUserList().remove(player);
+        }
+
+    }
+
+    private String listCommand(){
+        String list = "\njoin Name - пригласить игрока в игру\nplayers - список игроков в игре\nhelp - список команд";
+        return list;
+    }
+
+
+    private void confirmConnect(){
+        player.enemy.setCon(false);
+        player.setWhite(!player.enemy.getWhite());
+        player.setStroke(!player.enemy.getStroke());
+        player.setChessBoard(player.enemy.getChessBoard());
+        game(player.enemy);
+    }
+
+    private void connectPlayer(String name){
+        try{
+            boolean resultConnect = connect(name);
+            if(!resultConnect){
+                player.getOutputStream().writeUTF("Ошибка подключения...");
+            }
         } catch (IOException ex){
             System.out.println(ex);
         }
 
     }
 
+    private void listPlayers(){
+        try {
+            String line = "";
+            for (User user : getUserList()) {
+                if (user.getConnect() == false) {
+                    line += user.getName() + "\n";
+                }
+            }
+            player.getOutputStream().writeUTF(line);
+        } catch (IOException ex){
+            System.out.println(ex);
+        }
 
-    synchronized private boolean whoWhite(){
-        return new Random().nextBoolean();
     }
+
+    private String listCommandGame(){
+        String list = "\nboard - показать доску\nfigure - показать наименования фигур\nclose - сдаться и завершить игру\nhelp - список команд";
+        return list;
+    }
+
+    private String listFigure(){
+        String line = "P - пешка\nK-король\nQ - ферзь\nB - слон\nH - конь\nR - ладья";
+        return line;
+    }
+
 
 
 }
