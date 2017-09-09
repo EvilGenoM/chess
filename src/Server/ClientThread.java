@@ -59,9 +59,12 @@ public class ClientThread extends Thread {
                         unconnect(user);
                         return false;
                     }
+                    if(user.getConnect() == false){
+                        return false;
+                    }
                 }
                 game(user);
-                player.setCon(false);
+                player.setCon(true);
                 return true;
             }
         }
@@ -71,6 +74,8 @@ public class ClientThread extends Thread {
     }
 
     synchronized private void unconnect(User enemy){
+        player.setCon(true);
+        enemy.setCon(true);
         player.setConnect(false);
         enemy.setConnect(false);
         player.enemy = null;
@@ -96,7 +101,7 @@ public class ClientThread extends Thread {
                     if(line.equals("close")) {
                         unconnect(enemy);
                         enemy.getOutputStream().writeUTF("Вы победили! Игрок "+player.getName()+" сдался!");
-                        player.getOutputStream().writeUTF("Вы сдались! Игрок"+enemy.getName()+" победил!");
+                        player.getOutputStream().writeUTF("Вы сдались! Игрок "+enemy.getName()+" победил!");
                         break;
                     }
 
@@ -107,6 +112,7 @@ public class ClientThread extends Thread {
                     }
 
                     if(line.equals("figure")) {
+                        line = listFigure();
                         player.getOutputStream().writeUTF(line);
                         continue;
                     }
@@ -138,7 +144,7 @@ public class ClientThread extends Thread {
                     enemy.setStroke(true);
                 }
                 if(player.getConnect() == false){
-                    player.setCon(false);
+                    player.setCon(true);
                     player.getOutputStream().writeUTF("Разрыв соединения...");
                     break;
                 }
@@ -167,6 +173,10 @@ public class ClientThread extends Thread {
                 if(line.equals("players")){ listPlayers(); continue;}
 
                 if(line.equals("Y")){ confirmConnect(); continue;}
+                else if(line.equals("N") && player.getConnect() == true){
+                    unconnect(player.enemy);
+                    continue;
+                }
 
             }
 
