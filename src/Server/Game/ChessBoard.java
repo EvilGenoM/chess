@@ -160,6 +160,31 @@ public class ChessBoard {
         return line;
     }
 
+    public boolean takeStep(boolean white){
+        boolean result = false;
+        Figure king = null;
+        ArrayList<String> allStokes = new ArrayList<String>();
+        for(Map.Entry entry : board.entrySet()){
+            Figure figure = (Figure) entry.getValue();
+            if(figure != null
+                        && figure.getClass().getSimpleName().equals("King")
+                        && figure.getWhite() != white){
+                king = figure;
+            }
+            if(figure != null && figure.getWhite() == white){
+                char[] nameCell = figure.findSymbolNumber(figure.getLocation());
+                figure.createListStrokes(allStokes, nameCell);
+            }
+        }
+        for (String stroke : allStokes){
+            if(king != null && king.getLocation().equals(stroke)){
+                return true;
+            }
+        }
+
+        return result;
+    }
+
     public synchronized boolean whoWhite(){
         return new Random().nextBoolean();
     }
