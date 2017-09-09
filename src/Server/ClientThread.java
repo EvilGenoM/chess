@@ -127,6 +127,13 @@ public class ClientThread extends Thread {
                         unconnect(enemy);
                         break;
                     }
+
+                    if(enemy.getChessBoard().takeStep(player.getWhite())){
+                        enemy.getOutputStream().writeUTF("Вам шаг!");
+                        player.getOutputStream().writeUTF("Вы поставили шаг!");
+                    }
+
+
                     player.setStroke(false);
                     enemy.setStroke(true);
                 }
