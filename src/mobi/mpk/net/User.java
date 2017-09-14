@@ -29,7 +29,7 @@ public class User {
     }
 
     public boolean equals(User user){
-        if(this.name.equals(user.getName())){
+        if(this.name != null && this.name.equals(user.getName())){
             return true;
         } else {
             return false;
