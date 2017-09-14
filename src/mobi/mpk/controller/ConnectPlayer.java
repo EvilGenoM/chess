@@ -1,36 +1,74 @@
 package mobi.mpk.controller;
 
-import mobi.mpk.Constant;
+import mobi.mpk.domain.GameController;
 import mobi.mpk.net.Server;
 import mobi.mpk.net.User;
 
 import static mobi.mpk.net.Server.getControllerList;
 
-public class Connect {
+public class ConnectPlayer implements Connect {
 
-    Controller player1Controller;
-    Controller player2Contoller;
+    private Controller player1Controller;
+    private Controller player2Controller;
+    private GameController gameController;
 
+    @Override
+    public Controller getPlayer1Controller() {
+        return player1Controller;
+    }
 
+    @Override
+    public Controller getPlayer2Controller() {
+        return player2Controller;
+    }
+
+    @Override
     public Reply execute(Request request, Controller control){
 
+        if(gameController == null) {
 
-        String[] comand = request.getText().split(" ");
-        System.out.println(comand[0]);
-        switch (comand[0]){
-            case "join":
-                player1Controller = control;
-                return connectPlayer(request);
-            case "Y":
-                if(player2Contoller != null && player2Contoller == control){
-                    System.out.println("Okay");
-                }
-                break;
-            default:
-                break;
+            String[] comand = request.getText().split(" ");
+            System.out.println(comand[0]);
+
+            switch (comand[0]) {
+                case "join":
+                    player1Controller = control;
+                    return connectPlayer(request);
+                default:
+                    if (player2Controller != null && player2Controller == control) {
+                        return confirmConnection(request);
+                    }
+                    break;
+            }
+
+        } else {
+
+            if(control.equals(getPlayer1Controller())){
+                return sendRequestGame(request, player1Controller, player2Controller);
+            } else {
+                return sendRequestGame(request, player2Controller, player1Controller);
+            }
+
         }
 
         return null;
+
+    }
+
+    private Reply sendRequestGame(Request request,
+                                 Controller controllerPlayerStroke,
+                                 Controller controllerPlayerWait){
+
+        Reply replyPlayerWait = new Reply();
+        Reply replyPlyaerStroke = gameController.handleStroke(request,
+                                                                controllerPlayerStroke.getUser(),
+                                                                replyPlayerWait);
+
+        if(replyPlayerWait != null){
+            controllerPlayerWait.sendReply(replyPlayerWait);
+        }
+
+        return replyPlyaerStroke;
 
     }
 
@@ -54,18 +92,18 @@ public class Connect {
 
         for (Controller controller : getControllerList()){
             if(controller.getUser().equals(player)){
-                player2Contoller = controller;
-                player2Contoller.setConnect(this);
+                player2Controller = controller;
+                player2Controller.setConnect(this);
                 Reply sendReply = new Reply();
                 sendReply.setText("Вам предлагает поиграть игрок "+
                                         player1Controller.getUser().getName()+" [Y/N]");
-                player2Contoller.sendReply(sendReply);
+                player2Controller.sendReply(sendReply);
                 player1Controller.setWait(true);
                 break;
             }
         }
 
-        if(player2Contoller == null){
+        if(player2Controller == null){
             reply.setText("Ошибка нахождения контроллера");
             return reply;
         }
@@ -76,7 +114,38 @@ public class Connect {
 
     }
 
-    private Reply 
+    private Reply confirmConnection(Request request){
+
+        Reply reply = new Reply();
+
+        if(request.getText().equals("Y")){
+
+            gameController = new GameController(this);
+            player1Controller.setWait(false);
+            reply.setText("Игра началась");
+            player1Controller.sendReply(reply);
+
+        } else{
+
+            unconnect();
+            reply.setText("Соединение разорвано!");
+            player1Controller.sendReply(reply);
+
+        }
+
+        return reply;
+    }
+
+    private void unconnect(){
+
+        player1Controller.setWait(false);
+
+        player2Controller.setConnect(new ConnectPlayer());
+        player2Controller = null;
+
+        player1Controller = null;
+
+    }
 
     private String parseReplyText(Request request){
 
