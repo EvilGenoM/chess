@@ -5,6 +5,7 @@ import mobi.mpk.net.Server;
 import mobi.mpk.net.User;
 
 import static mobi.mpk.net.Server.getUserList;
+import static mobi.mpk.Constant.*;
 
 
 public class Command {
@@ -12,20 +13,20 @@ public class Command {
     public boolean execute(Request request, Reply reply){
 
         switch (request.getText()){
-            case "help":
-                reply.setLog(Constant.LOG_COMMAND+" help\n");
-                reply.setText(Constant.REPLY_HELP);
+            case COMMAND_HELP:
+                reply.setLog(LOG_COMMAND+" "+COMMAND_HELP+"\n");
+                reply.setText(REPLY_HELP);
                 return true;
-            case "players":
-                reply.setLog(Constant.LOG_COMMAND+" players\n");
+            case COMMAND_PLAYERS:
+                reply.setLog(LOG_COMMAND+" "+COMMAND_PLAYERS+"\n");
                 reply.setText(userList());
                 return true;
-            case "close":
-                reply.setLog(Constant.LOG_COMMAND+" close\n");
+            case COMMAND_CLOSE:
+                reply.setLog(LOG_COMMAND+" "+COMMAND_CLOSE+"\n");
                 reply.setClose(true);
                 return true;
             default:
-                reply.setLog(Constant.ERROR_COMMAND);
+                reply.setLog(ERROR_COMMAND);
                 break;
         }
 
