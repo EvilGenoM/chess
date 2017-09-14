@@ -1,19 +1,26 @@
-package mobi.mpk.domain.rools;
+package mobi.mpk.domain.rules;
 
+import mobi.mpk.domain.Board;
+import mobi.mpk.domain.Cell;
 import mobi.mpk.domain.Color;
+import mobi.mpk.domain.Player;
 import mobi.mpk.domain.fabricfigure.*;
 import mobi.mpk.domain.figure.*;
 
 import java.util.*;
 
-public class ClassicChessRools implements Rools {
+public class ClassicChessRules implements Rules {
 
 
     private Figure figure;
+    private RulesStrokes rs;
 
 
     @Override
-    public void move() {
+    public boolean move(Cell from, Cell to, Board board) {
+
+        RulesStrokes rs = new ClassicRulesStrokes();
+        return rs.strokeFigure(from, to, board);
 
     }
 
@@ -48,8 +55,18 @@ public class ClassicChessRools implements Rools {
     }
 
     @Override
-    public void addColorPlayer(){
+    public Player[] identifyWhitePlayer(Player player1, Player player2){
+        Player[] players = new Player[2];
 
+        if(new Random().nextInt(1) == 1){
+            players[0] = player1;
+            players[1] = player2;
+        } else {
+            players[0] = player2;
+            players[1] = player1;
+        }
+
+        return players;
     }
 
 
