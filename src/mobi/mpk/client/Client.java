@@ -1,4 +1,7 @@
-package Client;
+package mobi.mpk.client;
+
+import mobi.mpk.controller.Reply;
+import mobi.mpk.controller.Request;
 
 import java.io.IOException;
 import java.io.*;
@@ -8,8 +11,8 @@ public class Client {
 
     private int port = 8080;
     private String adress = "127.0.0.1";
-    private DataInputStream in;
-    private DataOutputStream out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
 
     public static void main(String[] args) {
@@ -23,27 +26,32 @@ public class Client {
             System.out.println("Вы подключились!");
 
 
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.println("Введите имя:");
+            String line;
 
-            String name = reader.readLine();
-            out.writeUTF(name);
+            Request request = new Request();
 
+            request.setStart(true);
 
-            String line = null;
+            line = reader.readLine();
+            request.setText(line);
+
+            out.writeObject(request);
+
 
             Render render = new Render();
             render.start();
 
 
             while(true){
-
+                request = new Request();
                 line = reader.readLine();
-                out.writeUTF(line);
+                request.setText(line);
+                out.writeObject(request);
                 if(line.equals("exit")) break;
 
             }
@@ -59,7 +67,7 @@ public class Client {
 
 
     public class Render extends Thread{
-        private boolean stop;
+        private boolean stop = false;
 
         public void setStop(){
             this.stop = true;
@@ -68,12 +76,21 @@ public class Client {
         @Override
         public void run(){
             try{
+
+                Reply reply;
+
                 while (!stop) {
-                    String str = in.readUTF();
-                    System.out.println(str);
+                    reply =(Reply) in.readObject();
+                    if(reply.getText() != null){
+                        System.out.println(reply.getText());
+                    } else {
+                        System.out.println(reply.getLog());
+                    }
                 }
             } catch (IOException ex){
                 System.out.println(ex);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
 
