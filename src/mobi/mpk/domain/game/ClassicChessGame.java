@@ -7,6 +7,8 @@ import mobi.mpk.net.User;
 
 import java.util.List;
 
+import static mobi.mpk.Constant.GAME_ERROR_NOTYOUSTROKE;
+
 public class ClassicChessGame extends Game{
 
     private Color nowStroke = Color.white;
@@ -24,11 +26,11 @@ public class ClassicChessGame extends Game{
 
         Cell[][] cells = getBoard().getMassiveCell();
 
-        List<Figure> orderFigures = getRools().orderFiguresOnBorad(Color.white);
+        List<Figure> orderFigures = getRules().orderFiguresOnBorad(Color.white);
 
         putFiguresOnCell(cells, orderFigures, 0, 0);
 
-        orderFigures = getRools().orderFiguresOnBorad(Color.black);
+        orderFigures = getRules().orderFiguresOnBorad(Color.black);
 
         putFiguresOnCell(cells, orderFigures, 0, 6);
 
@@ -41,21 +43,21 @@ public class ClassicChessGame extends Game{
         if(nowStroke == Color.white){
 
             if(getPlayerWhite().getUser().equals(user)){
-                String answer = getPlayerWhite().move(stroke, getBoard(), getRools());
-                newStroke();
+                String answer = getPlayerWhite().move(stroke, getBoard(), getRules(), Color.white);
+                nextStroke();
                 return answer;
             } else {
-                return "Не ваш ход!";
+                return GAME_ERROR_NOTYOUSTROKE;
             }
 
         } else {
 
             if(getPlayerBlack().getUser().equals(user)){
-                String answer = getPlayerBlack().move(stroke, getBoard(), getRools());
-                newStroke();
+                String answer = getPlayerBlack().move(stroke, getBoard(), getRules(), Color.black);
+                nextStroke();
                 return answer;
             } else {
-                return "Не ваш ход!";
+                return GAME_ERROR_NOTYOUSTROKE;
             }
 
         }
@@ -63,7 +65,19 @@ public class ClassicChessGame extends Game{
 
     }
 
-    private void newStroke(){
+    @Override
+    public Color getColorPlayer(Player player){
+
+        if(player.equals(getPlayerWhite())){
+            return Color.white;
+        } else {
+            return Color.black;
+        }
+
+    }
+
+
+    private void nextStroke(){
         if(nowStroke == Color.white){
             nowStroke = Color.black;
         } else {
