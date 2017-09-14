@@ -11,15 +11,11 @@ public class Player {
         this.user = user;
     }
 
-    public Player(){
-
-    }
-
     public User getUser(){
         return this.user;
     }
 
-    public String move(Stroke stroke, Board board, Rules rules){
+    public String move(Stroke stroke, Board board, Rules rules, Color color){
 
         Cell[][] cells = board.getMassiveCell();
         Cell from = null;
@@ -58,5 +54,15 @@ public class Player {
         return "Ошибка хода";
 
     }
+
+
+    public boolean equals(Player player){
+        if(player.user.equals(user)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
