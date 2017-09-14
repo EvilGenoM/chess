@@ -15,13 +15,13 @@ public abstract class Game {
 
     private Board board;
 
-    private Rules rools;
+    private Rules rules;
 
-    public Game(Player player1, Player player2, Rules rools){
+    public Game(Player player1, Player player2, Rules rules){
 
-        this.rools = rools;
+        this.rules = rules;
 
-        Player[] players = this.rools.identifyWhitePlayer(player1, player2);
+        Player[] players = this.rules.identifyWhitePlayer(player1, player2);
 
         this.playerWhite = players[0];
 
@@ -36,13 +36,15 @@ public abstract class Game {
 
     public abstract String handleStroke(Stroke stroke, User user);
 
+    public abstract Color getColorPlayer(Player player);
+
     protected abstract void initBoard();
 
     protected Board getBoard(){
         return board;
     }
 
-    protected Rules getRools() { return rools; }
+    protected Rules getRules() { return rules; }
 
     protected Player getPlayerBlack() {
         return playerBlack;
