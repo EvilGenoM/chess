@@ -4,25 +4,48 @@ import mobi.mpk.controller.*;
 import mobi.mpk.domain.game.*;
 import mobi.mpk.net.User;
 
+import static mobi.mpk.Constant.*;
 import static mobi.mpk.net.Server.getPlayersList;
 
 public class GameController {
 
-    private Connect connect;
+    private Controller player1Controller;
+    private Controller player2Controller;
     private Game game;
 
-    public GameController(Connect connect){
+    public GameController(Controller player1Controller, Controller player2Controller){
 
-        this.connect = connect;
+        this.player1Controller = player1Controller;
+        this.player2Controller = player2Controller;
 
         Player[] players = getPlayers();
 
-
         game = new ClassicChessGame(players[0], players[1]);
+
+        Reply reply1 = new Reply();
+        Reply reply2 = new Reply();
+
+        if(game.getColorPlayer(players[0]) == Color.white){
+
+            reply1.setText(GAME_YOUWHITE);
+            this.player1Controller.sendReply(reply1);
+
+            reply2.setText(GAME_YOUBLACK);
+            this.player2Controller.sendReply(reply2);
+
+        } else {
+
+            reply1.setText(GAME_YOUWHITE);
+            this.player2Controller.sendReply(reply1);
+
+            reply2.setText(GAME_YOUBLACK);
+            this.player1Controller.sendReply(reply2);
+
+        }
 
     }
 
-    public Reply handleStroke(Request request, User user, Reply replyEnemy){
+    public Reply sendRequest(Request request, User user){
 
         Reply reply = new Reply();
 
@@ -32,13 +55,10 @@ public class GameController {
             String answer = game.handleStroke(stroke, user);
             reply.setText(answer);
 
-            if(answer.equals("Ход успешно сделан")){
-                replyEnemy.setText(""+user.getName()+": " + request.getText());
-            }
-
         }
 
         return reply;
+
     }
 
 
@@ -48,12 +68,12 @@ public class GameController {
 
         for(Player player : getPlayersList()){
 
-            boolean isPlayerInList = isPlayerInList(player, connect.getPlayer1Controller());
+            boolean isPlayerInList = isPlayerInList(player, player1Controller);
             if(isPlayerInList){
                 players[0] = player;
             }
 
-            isPlayerInList = isPlayerInList(player, connect.getPlayer2Controller());
+            isPlayerInList = isPlayerInList(player, player2Controller);
             if(isPlayerInList){
                 players[1] = player;
             }
@@ -86,9 +106,9 @@ public class GameController {
             if(players[i] == null){
 
                 if(i == 0){
-                    players[i] = new Player(connect.getPlayer1Controller().getUser());
+                    players[i] = new Player(player1Controller.getUser());
                 } else{
-                    players[i] = new Player(connect.getPlayer2Controller().getUser());
+                    players[i] = new Player(player2Controller.getUser());
                 }
 
                 getPlayersList().add(players[i]);
