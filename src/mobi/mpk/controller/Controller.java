@@ -1,5 +1,6 @@
 package mobi.mpk.controller;
 
+import mobi.mpk.domain.GameController;
 import mobi.mpk.net.User;
 
 import java.util.Stack;
@@ -12,6 +13,7 @@ public class Controller {
 
     private Command command;
     private Connect connect;
+    private GameController gameController;
     private Stack<Reply> replies;
     private User user;
     private boolean isWait;
@@ -37,6 +39,14 @@ public class Controller {
         this.connect = connect;
     }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
     public Reply getReply(){
         if(!replies.empty()) {
             return replies.pop();
@@ -57,7 +67,7 @@ public class Controller {
             handleReply.setText("Ваше имя " + user.getName());
             replies.push(handleReply);
 
-        } else {
+        } else if(gameController == null) {
 
             boolean isCommand = command.execute(request, handleReply);
 
@@ -66,6 +76,11 @@ public class Controller {
             }
 
             replies.push(handleReply);
+
+        } else {
+
+           Reply gameReply = gameController.sendRequest(request, user);
+           replies.push(gameReply);
 
         }
 
