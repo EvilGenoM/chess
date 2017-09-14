@@ -1,4 +1,4 @@
-package Server;
+package mobi.mpk.server;
 
 import java.io.*;
 import java.net.*;

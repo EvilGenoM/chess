@@ -1,13 +1,12 @@
-package Server;
+package mobi.mpk.server;
 
-import Server.Game.ChessBoard;
+import mobi.mpk.server.Game.ChessBoard;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import static Server.Server.getUserList;
 import static java.lang.System.currentTimeMillis;
 
 public class ClientThread extends Thread {
@@ -30,18 +29,18 @@ public class ClientThread extends Thread {
             String name = in.readUTF();
 
             player = new User(this.socket, in, out, name);
-            getUserList().add(player);
+            Server.getUserList().add(player);
 
             this.comand();
 
         } catch (IOException ex){
-            getUserList().remove(player);
+            Server.getUserList().remove(player);
             System.out.println(ex);
         }
     }
 
     private boolean connect(String enemy) throws IOException {
-        for(User user : getUserList()){
+        for(User user : Server.getUserList()){
             if(user.getName().equals(enemy) && user.getConnect() == false){
                 player.getOutputStream().writeUTF("Ожидайте ответа...");
                 user.getOutputStream().writeUTF("Вам предложил поиграть игрок " + player.getName()+" Введите [Y/N]");
@@ -182,7 +181,7 @@ public class ClientThread extends Thread {
 
         } catch (IOException ex){
             System.out.println(ex);
-            getUserList().remove(player);
+            Server.getUserList().remove(player);
         }
 
     }
@@ -216,7 +215,7 @@ public class ClientThread extends Thread {
     private void listPlayers(){
         try {
             String line = "";
-            for (User user : getUserList()) {
+            for (User user : Server.getUserList()) {
                 if (user.getConnect() == false) {
                     line += user.getName() + "\n";
                 }

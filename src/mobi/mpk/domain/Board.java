@@ -1,10 +1,6 @@
-package Server.Game;
+package mobi.mpk.server.Game;
 
 import java.util.*;
-
-import static Server.Game.Figure.ANSI_GREEN;
-import static Server.Game.Figure.ANSI_RED;
-import static Server.Game.Figure.ANSI_RESET;
 
 public class ChessBoard {
 
@@ -106,10 +102,10 @@ public class ChessBoard {
         boolean black = false;
         for(Map.Entry entry : board.entrySet()){
             Figure figure = (Figure) entry.getValue();
-            if(figure != null && figure.name.equals(ANSI_GREEN+"K"+ANSI_RESET)){
+            if(figure != null && figure.name.equals(Figure.ANSI_GREEN+"K"+ Figure.ANSI_RESET)){
                 white = true;
             }
-            if(figure != null && figure.name.equals(ANSI_RED+"K"+ANSI_RESET)){
+            if(figure != null && figure.name.equals(Figure.ANSI_RED+"K"+ Figure.ANSI_RESET)){
                 black = true;
             }
         }

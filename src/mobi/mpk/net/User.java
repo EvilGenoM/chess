@@ -1,12 +1,12 @@
-package Server;
+package mobi.mpk.server;
 
-import Server.Game.ChessBoard;
+import mobi.mpk.server.Game.ChessBoard;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
-import static Server.Server.getUserList;
+import static mobi.mpk.server.Server.getUserList;
 
 public class User {
     private Socket socket;
