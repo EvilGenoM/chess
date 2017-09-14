@@ -25,8 +25,6 @@ public class TestGame {
 
     @Before
     public void init(){
-        player1 = new Player();
-        player2 = new Player();
         rulesStrokes = new ClassicRulesStrokes();
         game = new ClassicChessGame(player1, player2);
     }
@@ -61,7 +59,30 @@ public class TestGame {
     }
 
     @org.junit.Test
-    public void movePlayer(){
+    public void equalsPlayer(){
+        User user = new User();
+        user.setName("sd");
+
+        Player player1 = new Player(user);
+        Player player2 = new Player(user);
+
+        assertTrue(player1.equals(player2));
+    }
+
+    @Test
+    public void madeStroke(){
+        Stroke stroke = new Stroke("b1 c3");
+        Cell to = new Cell('c',3);
+        Cell from = new Cell('b',1);
+
+        System.out.println(stroke.getFrom().getX()+""+stroke.getFrom().getY());
+        System.out.println(from.getX()+""+from.getY());
+
+        boolean cells = stroke.getFrom().equals(from);
+        boolean cells2 = stroke.getTo().equals(to);
+
+        assertTrue(cells);
+        assertTrue(cells2);
 
     }
 
