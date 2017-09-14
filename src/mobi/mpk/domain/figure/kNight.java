@@ -1,4 +1,11 @@
 package mobi.mpk.domain.figure;
 
-public class kNight {
+import mobi.mpk.domain.Color;
+
+public class kNight extends Figure {
+
+    public kNight(Color color) {
+        super(color);
+    }
+
 }
