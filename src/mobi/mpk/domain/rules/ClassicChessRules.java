@@ -56,6 +56,7 @@ public class ClassicChessRules implements Rules {
 
     @Override
     public Player[] identifyWhitePlayer(Player player1, Player player2){
+
         Player[] players = new Player[2];
 
         if(new Random().nextInt(1) == 1){
@@ -67,6 +68,7 @@ public class ClassicChessRules implements Rules {
         }
 
         return players;
+
     }
 
 
