@@ -20,16 +20,22 @@ public class ClassicRulesStrokes implements RulesStrokes{
 
         switch (figure.getClass().getSimpleName()){
             case "King":
+                System.out.println("1");
                 return strokesKing(from, to, board);
             case "Queen":
+                System.out.println("2");
                 return strokeQueen(from, to, board);
             case "Bishop":
+                System.out.println("3");
                 return strokeBishop(from, to, board);
             case "kNight":
-                return strokesKNight(from, to, board);
+                System.out.println("4");
+                return strokesKNight(from, to);
             case "Rook":
+                System.out.println("5");
                 return strokesRook(from, to, board);
             case "Pawn":
+                System.out.println("6");
                 return strokesPawn(from, to, board);
             default:
                 return false;
@@ -57,7 +63,7 @@ public class ClassicRulesStrokes implements RulesStrokes{
 
     }
 
-    private boolean strokesKNight(Cell from, Cell to, Board board){
+    private boolean strokesKNight(Cell from, Cell to){
 
         if(from.getX()-to.getX() == 1){
 
