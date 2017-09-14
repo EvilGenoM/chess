@@ -1,3 +1,5 @@
+package mobi.mpk;
+
 import mobi.mpk.net.Server;
 
 public class Application {
