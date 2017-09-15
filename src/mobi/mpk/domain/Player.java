@@ -3,6 +3,8 @@ package mobi.mpk.domain;
 import mobi.mpk.domain.rules.Rules;
 import mobi.mpk.net.User;
 
+import static mobi.mpk.Constant.ERROR_MOVE;
+
 public class Player {
 
     private User user;
@@ -15,7 +17,7 @@ public class Player {
         return this.user;
     }
 
-    public String move(Stroke stroke, Board board, Rules rules, Color color){
+    public ResultStroke move(Stroke stroke, Board board, Rules rules, Color color){
 
         Cell[][] cells = board.getMassiveCell();
         Cell from = null;
@@ -41,17 +43,14 @@ public class Player {
 
         if(from != null && to != null){
 
-            boolean doStroke = rules.move(from, to, board);
-
-            if(doStroke){
-                return "Ход успешно сделан";
-            } else {
-                return "Ошибка хода";
-            }
+            return rules.move(from, to, board);
 
         }
 
-        return "Ошибка хода";
+        ResultStroke resultStroke = new ResultStroke();
+        resultStroke.setText(ERROR_MOVE);
+
+        return resultStroke;
 
     }
 
