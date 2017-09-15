@@ -28,7 +28,7 @@ public class Cell {
             ++this.x;
         }
 
-        this.y = y;
+        this.y = y+1;
         this.figure = null;
     }
 
