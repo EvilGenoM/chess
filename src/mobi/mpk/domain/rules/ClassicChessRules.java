@@ -1,9 +1,6 @@
 package mobi.mpk.domain.rules;
 
-import mobi.mpk.domain.Board;
-import mobi.mpk.domain.Cell;
-import mobi.mpk.domain.Color;
-import mobi.mpk.domain.Player;
+import mobi.mpk.domain.*;
 import mobi.mpk.domain.fabricfigure.*;
 import mobi.mpk.domain.figure.*;
 
@@ -17,7 +14,7 @@ public class ClassicChessRules implements Rules {
 
 
     @Override
-    public boolean move(Cell from, Cell to, Board board) {
+    public ResultStroke move(Cell from, Cell to, Board board) {
 
         RulesStrokes rs = new ClassicRulesStrokes();
         return rs.strokeFigure(from, to, board);
