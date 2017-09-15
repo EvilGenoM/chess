@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d095b3b-1f98-4f3a-98f3-7081f7707693" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/mobi/mpk/client/Client.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/Reply.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/cli/Reply.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/Request.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/cli/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyChess.iml" afterPath="$PROJECT_DIR$/MyChess.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/Constant.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/Constant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/TestGame.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/TestGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/Command.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/controller/Command.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/Connect.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/controller/Connect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/ConnectPlayer.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/controller/ConnectPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/controller/Controller.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/controller/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/domain/GameController.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/domain/GameController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/domain/figure/Figure.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/domain/figure/Figure.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/domain/game/ClassicChessGame.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/domain/game/ClassicChessGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/domain/game/Game.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/domain/game/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mobi/mpk/net/ClientThread.java" afterPath="$PROJECT_DIR$/src/mobi/mpk/net/ClientThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,75 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/GameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="39" column="40" lean-forward="false" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#422#430#0" expanded="true" />
-                <element signature="e#1196#1197#0" expanded="true" />
-                <element signature="e#1230#1231#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientThread.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/ClientThread.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="79" column="37" lean-forward="false" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Reply.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Reply.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Request.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Request.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -193,17 +111,47 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
+      <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="MyChess" type="58d84e3e:PackageViewProjectNode" />
-              <item name="MyChess" type="616d4139:PackageViewModuleNode" />
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mpk" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -254,52 +202,22 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
+      <pane id="Scratches" />
+      <pane id="PackagesPane">
         <subPane>
           <expand>
             <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyChess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyChess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="mpk" type="462c0819:PsiDirectoryNode" />
+              <item name="MyChess" type="58d84e3e:PackageViewProjectNode" />
+              <item name="MyChess" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Загрузки/src/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -511,7 +429,6 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -533,6 +450,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -561,44 +479,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/King.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/kNight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Pawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Queen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/King.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/kNight.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Pawn.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Queen.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorRook.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorQueen.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorKing.java" />
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Rook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Rook.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/FigureTEST.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/client/Reply.java" />
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/client/Request.java" />
@@ -610,334 +498,44 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/BankReply.java" />
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Connect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="43" lean-forward="true" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="31" column="32" lean-forward="false" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/ConnectPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="38" column="47" lean-forward="true" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Stroke.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="18" />
-          <folding>
-            <element signature="e#515#516#0" expanded="true" />
-            <element signature="e#540#541#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorPawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorBishop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/Creator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorKnight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Cell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/ResultStroke.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/RulesStrokes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/RulesStrokesFigure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesKing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="71" lean-forward="true" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/Rules.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="10" column="68" lean-forward="false" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Figure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/ClassicChessRules.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="33" column="17" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="33" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesBishop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="89" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesRook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesQueen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="139" column="27" lean-forward="false" selection-start-line="139" selection-start-column="27" selection-end-line="139" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesKnight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="50" column="8" lean-forward="true" selection-start-line="50" selection-start-column="8" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesFigure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="27" column="46" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="27" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/ClassicRulesStrokes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="834">
-          <caret line="50" column="36" lean-forward="false" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/game/ClassicChessGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="71" column="36" lean-forward="true" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/game/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="36" column="32" lean-forward="false" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesPawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1461">
-          <caret line="101" column="79" lean-forward="false" selection-start-line="101" selection-start-column="79" selection-end-line="101" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/TestGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/Constant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="44" column="75" lean-forward="false" selection-start-line="44" selection-start-column="75" selection-end-line="44" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="39" column="40" lean-forward="false" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/client/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="14" column="35" lean-forward="false" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#422#430#0" expanded="true" />
-            <element signature="e#1196#1197#0" expanded="true" />
-            <element signature="e#1230#1231#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/ClientThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="79" column="37" lean-forward="false" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Reply.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/Application.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Connect.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Command.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/ConnectPlayer.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Stroke.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorPawn.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorBishop.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/Creator.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/fabricfigure/CreatorKnight.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Cell.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/ResultStroke.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/RulesStrokes.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/RulesStrokesFigure.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesKing.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/Rules.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/figure/Figure.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/ClassicChessRules.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/Player.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesBishop.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesRook.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesQueen.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesKnight.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesFigure.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/ClassicRulesStrokes.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/game/ClassicChessGame.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/game/Game.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/rules/crfigure/ClassicRulesStrokesPawn.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/TestGame.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/Constant.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/domain/GameController.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/client/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/net/ClientThread.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/controller/Controller.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Reply.java" />
+    <entry file="file://$PROJECT_DIR$/src/mobi/mpk/cli/Request.java" />
   </component>
   <component name="masterDetails">
     <states>
