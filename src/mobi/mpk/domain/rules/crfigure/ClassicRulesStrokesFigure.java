@@ -54,4 +54,28 @@ public abstract class ClassicRulesStrokesFigure implements RulesStrokesFigure {
     }
 
 
+    protected int[] findCellOnBoard(Cell cell, Cell[][] cells){
+
+        int[] coordCell = new int[2];
+
+        for(int x = 0; x<8; x++){
+
+            for(int y = 0; y<8; y++){
+
+                if(cells[x][y].equals(cell)){
+
+                    coordCell[0] = x;
+                    coordCell[1] = y;
+
+                }
+
+            }
+
+        }
+
+        return coordCell;
+
+    }
+
+
 }
