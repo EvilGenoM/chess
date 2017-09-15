@@ -43,9 +43,13 @@ public class ClassicChessGame extends Game{
         if(nowStroke == Color.white){
 
             if(getPlayerWhite().getUser().equals(user)){
-                String answer = getPlayerWhite().move(stroke, getBoard(), getRules(), Color.white);
-                nextStroke();
-                return answer;
+                ResultStroke answer = getPlayerWhite().move(stroke, getBoard(), getRules(), Color.white);
+
+                if(answer.isSuccess()) {
+                    nextStroke();
+                }
+
+                return answer.getText();
             } else {
                 return GAME_ERROR_NOTYOUSTROKE;
             }
@@ -53,9 +57,13 @@ public class ClassicChessGame extends Game{
         } else {
 
             if(getPlayerBlack().getUser().equals(user)){
-                String answer = getPlayerBlack().move(stroke, getBoard(), getRules(), Color.black);
-                nextStroke();
-                return answer;
+                ResultStroke answer = getPlayerBlack().move(stroke, getBoard(), getRules(), Color.black);
+
+                if(answer.isSuccess()) {
+                    nextStroke();
+                }
+
+                return answer.getText();
             } else {
                 return GAME_ERROR_NOTYOUSTROKE;
             }

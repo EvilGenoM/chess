@@ -40,9 +40,9 @@ public abstract class Game {
 
     protected abstract void initBoard();
 
-    protected Board getBoard(){
+    public Board getBoard(){
         return board;
-    }
+    }//!!!!!!!!!!!!!!!!!! protected
 
     protected Rules getRules() { return rules; }
 
