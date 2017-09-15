@@ -1,10 +1,7 @@
 package mobi.mpk;
 
 import junit.framework.TestCase;
-import mobi.mpk.domain.Cell;
-import mobi.mpk.domain.Color;
-import mobi.mpk.domain.Player;
-import mobi.mpk.domain.Stroke;
+import mobi.mpk.domain.*;
 import mobi.mpk.domain.figure.Pawn;
 import mobi.mpk.domain.figure.kNight;
 import mobi.mpk.domain.game.ClassicChessGame;
@@ -13,6 +10,8 @@ import mobi.mpk.domain.rules.ClassicRulesStrokes;
 import mobi.mpk.domain.rules.RulesStrokes;
 import mobi.mpk.net.User;
 import org.junit.*;
+
+import javax.jws.soap.SOAPBinding;
 
 import static org.junit.Assert.*;
 
@@ -34,29 +33,7 @@ public class TestGame {
         rulesStrokes = null;
     }
 
-    @org.junit.Test
-    public void strokeFigure(){
 
-        Cell[] to = new Cell[8];
-        to[0] = new Cell('d',2, null);
-        to[1] = new Cell('f',2, null);
-        to[2] = new Cell('c',3, null);
-        to[3] = new Cell('c',5, null);
-        to[4] = new Cell('g',3, null);
-        to[5] = new Cell('c',5, null);
-        to[6] = new Cell('d',6, null);
-        to[7] = new Cell('f',6, new kNight(Color.black));
-
-        for(int i = 0; i<8; i++){
-
-            Cell from = new Cell('e',4, new kNight(Color.white));
-            boolean isStroke = rulesStrokes.strokeFigure(from, to[i], null);
-            assertTrue(isStroke);
-
-        }
-
-
-    }
 
     @org.junit.Test
     public void equalsPlayer(){
@@ -83,6 +60,35 @@ public class TestGame {
 
         assertTrue(cells);
         assertTrue(cells2);
+
+    }
+
+    @Test
+    public void madeBoard(){
+        Board board = new Board();
+        Cell[][] cells = board.getMassiveCell();
+
+        System.out.println(""+cells[0][0].getX()+cells[0][0].getY());
+
+        boolean isCell = cells[0][0].equals(new Cell('a', 1));
+
+        assertTrue(isCell);
+
+
+    }
+
+    @Test
+    public void madeBoardFigure(){
+        User user = new User();
+        Player player = new Player(user);
+        Game game1 = new ClassicChessGame(player, player);
+
+        Board board = game.getBoard();
+
+        Cell[][] cells = board.getMassiveCell();
+        for(int i = 0; i<8; i++) {
+            System.out.println(cells[i][0].getFigure().getClass().getSimpleName());
+        }
 
     }
 
