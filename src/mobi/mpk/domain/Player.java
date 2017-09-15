@@ -43,7 +43,7 @@ public class Player {
 
         if(from != null && to != null){
 
-            return rules.move(from, to, board);
+            return rules.move(from, to, board, color);
 
         }
 

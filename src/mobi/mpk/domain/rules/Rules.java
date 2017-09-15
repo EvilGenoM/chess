@@ -8,7 +8,7 @@ import java.util.List;
 public interface Rules {
 
 
-    ResultStroke move(Cell from, Cell to, Board board);
+    ResultStroke move(Cell from, Cell to, Board board, Color color);
 
     List<Figure> orderFiguresOnBorad(Color color);
 

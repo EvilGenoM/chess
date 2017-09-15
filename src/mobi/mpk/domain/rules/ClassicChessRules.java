@@ -6,6 +6,8 @@ import mobi.mpk.domain.figure.*;
 
 import java.util.*;
 
+import static mobi.mpk.Constant.ERROR_COLOR_FIGURE;
+
 public class ClassicChessRules implements Rules {
 
 
@@ -14,7 +16,13 @@ public class ClassicChessRules implements Rules {
 
 
     @Override
-    public ResultStroke move(Cell from, Cell to, Board board) {
+    public ResultStroke move(Cell from, Cell to, Board board, Color color) {
+
+        if(from.getFigure() != null && from.getFigure().getColor() != color){
+            ResultStroke resultStroke = new ResultStroke();
+            resultStroke.setText(ERROR_COLOR_FIGURE);
+            return resultStroke;
+        }
 
         RulesStrokes rs = new ClassicRulesStrokes();
         return rs.strokeFigure(from, to, board);
