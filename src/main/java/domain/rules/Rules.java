@@ -1,0 +1,17 @@
+package domain.rules;
+
+import domain.*;
+import domain.figure.*;
+
+import java.util.List;
+
+public interface Rules {
+
+
+    ResultStroke move(Cell from, Cell to, Board board, Color color);
+
+    List<Figure> orderFiguresOnBorad(Color color);
+
+    Player[] identifyWhitePlayer(Player player1, Player player2);
+
+}
