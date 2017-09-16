@@ -49,6 +49,7 @@ public class ClassicChessGame extends Game{
                     nextStroke();
                 }
 
+
                 return answer;
             } else {
                 ResultStroke resultStroke = new ResultStroke();

@@ -4,6 +4,7 @@ import mobi.mpk.cli.Reply;
 import mobi.mpk.cli.Request;
 import mobi.mpk.controller.*;
 import mobi.mpk.domain.game.*;
+import mobi.mpk.net.Server;
 import mobi.mpk.net.User;
 
 import static mobi.mpk.Constant.*;
@@ -54,6 +55,11 @@ public class GameController {
         if(request.getText() != null){
 
             Stroke stroke = new Stroke(request.getText());
+
+            if(stroke.getFrom() == null || stroke.getTo() == null){
+                reply.setText("Не правильные данные! Ввеите клетку откуда и клетку куда");
+            }
+
             ResultStroke answer = game.handleStroke(stroke, user);
             reply.setText(answer.getText());
 
@@ -65,12 +71,39 @@ public class GameController {
                 } else{
                     player1Controller.sendReply(reply2);
                 }
+                if(answer.isEndGame()){
+                    Reply reply3 = new Reply();
+                    reply3.setText("Игра закончена победил игрок "+user.getName());
+                    player1Controller.sendReply(reply3);
+                    player2Controller.sendReply(reply3);
+                    unconectEnd();
+                }
             }
 
         }
 
         return reply;
 
+    }
+
+    public void unconect(User user){
+
+        Reply reply = new Reply();
+        reply.setText("Соединение разорвано");
+
+        if(player1Controller.getUser().equals(user)){
+            player2Controller.nullGameController();
+            player2Controller.sendReply(reply);
+        } else {
+            player1Controller.nullGameController();
+            player1Controller.sendReply(reply);
+        }
+
+    }
+
+    private void unconectEnd(){
+        player1Controller.nullGameController();
+        player2Controller.nullGameController();
     }
 
 

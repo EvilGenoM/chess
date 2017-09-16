@@ -34,9 +34,9 @@ public class ClassicRulesStrokesPawn extends ClassicRulesStrokesFigure{
                 return moveFigure(from, to);
             }
 
-        } else if(to.getY()-from.getY() == 2){ // 2 cell
+        } else if(to.getY()-from.getY() == 2 && from.getY() == 2){ // 2 cell
 
-            Cell beforeCell = cells[coordCell[0]][to.getY()-1];
+            Cell beforeCell = cells[coordCell[0]][to.getY()-2];
 
             if(to.getFigure() == null && beforeCell.getFigure() == null){
 
@@ -44,7 +44,7 @@ public class ClassicRulesStrokesPawn extends ClassicRulesStrokesFigure{
 
             }
 
-        } else if(to.getY()-from.getY() == to.getX()-from.getX()){ //attack
+        } else if(Math.abs(to.getY()-from.getY()) == Math.abs(to.getX()-from.getX())){ //attack
             if(to.getX()-from.getX() == 1  && to.getY()-from.getY() == 1){ //right
 
                 if(to.getFigure() != null){
@@ -76,15 +76,17 @@ public class ClassicRulesStrokesPawn extends ClassicRulesStrokesFigure{
 
         int[] coordCell = findCellOnBoard(from, cells);
 
+        System.out.println(coordCell[0]);
+
         if(to.getY()-from.getY() == -1){ // 1 cell
 
             if(to.getFigure() == null){
                 return moveFigure(from, to);
             }
 
-        } else if(to.getY()-from.getY() == -2){ // 2 cell
+        } else if(to.getY()-from.getY() == -2 && from.getY() == 7){ // 2 cell
 
-            Cell beforeCell = cells[coordCell[0]][to.getY()+1];
+            Cell beforeCell = cells[coordCell[0]][to.getY()];
 
             if(to.getFigure() == null && beforeCell.getFigure() == null){
 
@@ -92,7 +94,7 @@ public class ClassicRulesStrokesPawn extends ClassicRulesStrokesFigure{
 
             }
 
-        } else if(to.getY()-from.getY() == to.getX()-from.getX()){ //attack
+        } else if(Math.abs(to.getY()-from.getY()) == Math.abs(to.getX()-from.getX())){ //attack
             if(to.getX()-from.getX() == 1  && to.getY()-from.getY() == -1){ //right
 
                 if(to.getFigure() != null){

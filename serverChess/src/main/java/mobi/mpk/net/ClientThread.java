@@ -37,6 +37,7 @@ public class ClientThread extends Thread {
             }
 
         } catch (IOException ex){
+            controller.breakGameController();
             System.out.println(ex);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

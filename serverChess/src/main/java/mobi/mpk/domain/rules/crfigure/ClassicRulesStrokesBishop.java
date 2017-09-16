@@ -20,7 +20,7 @@ public class ClassicRulesStrokesBishop extends ClassicRulesStrokesFigure {
         int[] coordTo = findCellOnBoard(to, cells);
 
 
-        if(from.getX()-to.getX() == from.getY()-to.getY()){
+        if(Math.abs(from.getX()-to.getX()) == Math.abs(from.getY()-to.getY())){
 
 
             if(from.getX()-to.getX()<0 && from.getY()-to.getY()<0){ //up right

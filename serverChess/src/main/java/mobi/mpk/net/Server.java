@@ -3,12 +3,14 @@ package mobi.mpk.net;
 import mobi.mpk.controller.Controller;
 import mobi.mpk.domain.Player;
 
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
 public class Server {
-    int port = 8080;
+
+    int port = Configure.PORT;
     private static ArrayList<User> userList = new ArrayList<User>();
     private static ArrayList<Controller> contollerList = new ArrayList<Controller>();
     private static ArrayList<Player> playersList = new ArrayList<Player>();
@@ -32,6 +34,7 @@ public class Server {
         }
 
     }
+
 
     public static synchronized ArrayList<User> getUserList(){
         return userList;

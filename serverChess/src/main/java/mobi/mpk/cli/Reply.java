@@ -10,6 +10,24 @@ public class Reply implements Serializable {
     private String text;
     private Date date;
     private boolean isClose = false;
+    private String Stroke;
+    private boolean successStroke;
+
+    public boolean isSuccessStroke() {
+        return successStroke;
+    }
+
+    public void setSuccessStroke(boolean successStroke) {
+        this.successStroke = successStroke;
+    }
+
+    public void setStroke(String stroke) {
+        Stroke = stroke;
+    }
+
+    public String getStroke() {
+        return Stroke;
+    }
 
     public String getName() {
         return name;

@@ -53,7 +53,7 @@ public class Cell {
 
     public boolean equals(Cell cell){
 
-        if(this.x == cell.getX() && this.y == cell.getY()){
+        if(this != null && cell != null && this.x == cell.getX() && this.y == cell.getY()){
             return true;
         } else {
             return false;

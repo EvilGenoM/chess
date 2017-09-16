@@ -27,28 +27,28 @@ public class ClassicRulesStrokes implements RulesStrokes{
 
         }
 
-        switch (figure.getClass().getSimpleName()){
-            case "King":
-                rulesSF = new ClassicRulesStrokesKing();
-                return rulesSF.strokeFigure(from, to, board);
-            case "Queen":
-                rulesSF = new ClassicRulesStrokesQueen();
-                return rulesSF.strokeFigure(from, to, board);
-            case "Bishop":
-                rulesSF = new ClassicRulesStrokesBishop();
-                return rulesSF.strokeFigure(from, to, board);
-            case "kNight":
-                rulesSF = new ClassicRulesStrokesKnight();
-                return rulesSF.strokeFigure(from, to, board);
-            case "Rook":
-                rulesSF = new ClassicRulesStrokesRook();
-                return rulesSF.strokeFigure(from, to, board);
-            case "Pawn":
-                rulesSF = new ClassicRulesStrokesPawn();
-                return rulesSF.strokeFigure(from, to, board);
-            default:
-                resultStroke.setText(ERROR_MOVE);
-                return resultStroke;
+        String s = figure.getClass().getSimpleName();
+        if (s.equals("King")) {
+            rulesSF = new ClassicRulesStrokesKing();
+            return rulesSF.strokeFigure(from, to, board);
+        } else if (s.equals("Queen")) {
+            rulesSF = new ClassicRulesStrokesQueen();
+            return rulesSF.strokeFigure(from, to, board);
+        } else if (s.equals("Bishop")) {
+            rulesSF = new ClassicRulesStrokesBishop();
+            return rulesSF.strokeFigure(from, to, board);
+        } else if (s.equals("kNight")) {
+            rulesSF = new ClassicRulesStrokesKnight();
+            return rulesSF.strokeFigure(from, to, board);
+        } else if (s.equals("Rook")) {
+            rulesSF = new ClassicRulesStrokesRook();
+            return rulesSF.strokeFigure(from, to, board);
+        } else if (s.equals("Pawn")) {
+            rulesSF = new ClassicRulesStrokesPawn();
+            return rulesSF.strokeFigure(from, to, board);
+        } else {
+            resultStroke.setText(ERROR_MOVE);
+            return resultStroke;
         }
 
     }

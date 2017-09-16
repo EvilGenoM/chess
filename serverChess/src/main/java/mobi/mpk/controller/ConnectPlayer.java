@@ -8,6 +8,7 @@ import mobi.mpk.net.User;
 
 import static mobi.mpk.Constant.*;
 import static mobi.mpk.net.Server.getControllerList;
+import static mobi.mpk.net.Server.getUserList;
 
 public class ConnectPlayer implements Connect {
 
@@ -32,15 +33,14 @@ public class ConnectPlayer implements Connect {
         String[] comand = request.getText().split(" ");
         System.out.println(comand[0]);
 
-        switch (comand[0]) {
-            case COMMAND_JOIN:
-                player1Controller = control;
-                return connectPlayer(request);
-            default:
-                if (player2Controller != null && player2Controller == control) {
-                    confirmConnection(request);
-                }
-                break;
+        if (comand[0].equals(COMMAND_JOIN)) {
+            player1Controller = control;
+            return connectPlayer(request);
+        } else {
+            if (player2Controller != null && player2Controller == control) {
+                confirmConnection(request);
+            }
+
         }
 
 
@@ -55,7 +55,7 @@ public class ConnectPlayer implements Connect {
         String playerName = findName(request);
         User player = null;
 
-        for(User gamer : Server.getUserList()){
+        for(User gamer : getUserList()){
             if(gamer.getName().equals(playerName)){
                 player = gamer;
                 break;

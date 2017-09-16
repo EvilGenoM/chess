@@ -3,12 +3,14 @@ package mobi.mpk.controller;
 import mobi.mpk.cli.Reply;
 import mobi.mpk.cli.Request;
 import mobi.mpk.domain.GameController;
+import mobi.mpk.net.Server;
 import mobi.mpk.net.User;
 
 import java.util.Stack;
 
 import static mobi.mpk.net.Server.getControllerList;
 import static mobi.mpk.net.Server.getUserList;
+
 
 public class Controller {
 
@@ -43,6 +45,15 @@ public class Controller {
 
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
+    }
+
+    public void breakGameController(){
+        gameController.unconect(user);
+        gameController = null;
+    }
+
+    public void nullGameController(){
+        gameController = null;
     }
 
     public GameController getGameController() {

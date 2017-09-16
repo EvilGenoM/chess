@@ -25,7 +25,9 @@ public class ClassicChessRules implements Rules {
         }
 
         RulesStrokes rs = new ClassicRulesStrokes();
-        return rs.strokeFigure(from, to, board);
+        ResultStroke resultStroke = rs.strokeFigure(from, to, board);
+        deadKing(board, resultStroke);
+        return resultStroke;
 
     }
 
@@ -64,7 +66,9 @@ public class ClassicChessRules implements Rules {
 
         Player[] players = new Player[2];
 
-        if(new Random().nextInt(1) == 1){
+        Random random = new Random();
+
+        if(random.nextInt(1) == 1){
             players[0] = player1;
             players[1] = player2;
         } else {
@@ -73,6 +77,29 @@ public class ClassicChessRules implements Rules {
         }
 
         return players;
+
+    }
+
+    private void deadKing(Board board, ResultStroke resultStroke){
+
+
+        Cell[][] cells = board.getMassiveCell();
+        int kingSum = 0;
+
+        for(int x=0; x<8; x++){
+            for(int y = 0; y<8; y++){
+
+                if(cells[x][y].getFigure() != null && cells[x][y].getFigure().getClass().getName().equals("King")){
+                    kingSum += 1;
+                }
+
+            }
+        }
+
+        if(kingSum == 1){
+            resultStroke.setEndGame(true);
+        }
+
 
     }
 

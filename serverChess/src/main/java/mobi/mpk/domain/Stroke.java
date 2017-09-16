@@ -13,7 +13,9 @@ public class Stroke {
 
     public Stroke(String stroke){
 
-        String coordCell[] = stroke.split(" ");
+        String[] coordCell = new String[5];
+
+        coordCell = stroke.split(" ");
 
         if(coordCell[0] != null && coordCell[1] != null){
             this.from = createCell(coordCell[0]);
@@ -34,9 +36,13 @@ public class Stroke {
 
     private Cell createCell(String coordCell){
 
+        char[] letter = {'a', 'b', 'c','d','e','f','g','h'};
+
 
         char xCoordCell = coordCell.charAt(0);
         int yCoordCell = Character.getNumericValue(coordCell.charAt(1));
+
+
 
         return new Cell(xCoordCell, yCoordCell);
 
