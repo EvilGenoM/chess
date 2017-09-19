@@ -1,6 +1,6 @@
-package mobi.mpk;
+package mobi.mpk.chess;
 
-import mobi.mpk.net.Server;
+import mobi.mpk.chess.net.Server;
 
 public class Application {
     public static void main(String[] args) {
