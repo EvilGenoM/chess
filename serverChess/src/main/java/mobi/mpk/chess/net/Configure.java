@@ -1,4 +1,4 @@
-package mobi.mpk.net;
+package mobi.mpk.chess.net;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
