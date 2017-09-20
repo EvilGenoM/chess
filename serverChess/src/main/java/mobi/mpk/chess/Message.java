@@ -47,25 +47,45 @@ public class Message {
 
     }
 
+    public JSONObject getJson(){
+
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("name", this.name);
+        jsonObject.put("text", this.text);
+        jsonObject.put("date", this.date);
+
+        return jsonObject;
+    }
 
     public String getName() {
+
         return name;
+
     }
 
     public String getText() {
-        return text;
-    }
 
-    public Date getDate() {
-        return date;
+        return text;
+
     }
 
     public void setText(String text) {
+
         this.text = text;
+
+    }
+
+    public Date getDate() {
+
+        return date;
+
     }
 
     public void setDate(Date date) {
+
         this.date = date;
+
     }
 
 }

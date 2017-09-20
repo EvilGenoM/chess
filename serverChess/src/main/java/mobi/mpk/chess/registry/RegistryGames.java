@@ -31,9 +31,9 @@ public class RegistryGames {
         return localInstance;
     }
 
-    public void addControllerGame(User user, Controller controller){
+    public void addControllerGame(User user, ControllerGame controllerGame){
 
-        games.putIfAbsent(user, controller);
+        games.putIfAbsent(user, controllerGame);
 
     }
 

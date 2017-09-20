@@ -2,6 +2,9 @@ package mobi.mpk.chess.controller;
 
 import mobi.mpk.chess.Message;
 import mobi.mpk.chess.User;
+import mobi.mpk.chess.domain.Game;
+import mobi.mpk.chess.domain.GameClassic;
+import mobi.mpk.chess.domain.Player;
 
 public class ControllerGame implements Controller {
 
@@ -14,7 +17,7 @@ public class ControllerGame implements Controller {
         Player player1 = new Player(user1);
         Player player2 = new Player(user2);
 
-        this.game = new Game(player1, player2);
+        this.game = new GameClassic(player1, player2);
 
     }
 
