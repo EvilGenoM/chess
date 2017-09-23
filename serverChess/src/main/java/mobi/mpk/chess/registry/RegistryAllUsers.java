@@ -79,5 +79,9 @@ public class RegistryAllUsers implements Registry{
         return listUsers;
     }
 
+    public void clear(){
+        users.clear();
+    }
+
 
 }

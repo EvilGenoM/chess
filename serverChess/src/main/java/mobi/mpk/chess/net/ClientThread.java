@@ -2,12 +2,13 @@ package mobi.mpk.chess.net;
 
 
 
-import mobi.mpk.chess.Message;
+import mobi.mpk.chess.message.ManagerMessages;
+import mobi.mpk.chess.message.Message;
 import mobi.mpk.chess.User;
-import mobi.mpk.chess.controller.Controller;
-import mobi.mpk.chess.controller.ControllerLobby;
+import mobi.mpk.chess.controller.Controllable;
+import mobi.mpk.chess.controller.LobbyController;
+import mobi.mpk.chess.controller.ManagerConrollers;
 import mobi.mpk.chess.registry.RegistryAllUsers;
-import mobi.mpk.chess.registry.RegistryGames;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,9 +21,9 @@ public class ClientThread extends Thread {
 
     private Socket socket;
     private User user;
-    private Controller controller;
+    private Controllable controller;
 
-    public ClientThread(Socket socket, Controller controller){
+    public ClientThread(Socket socket, Controllable controller){
 
         this.socket = socket;
         this.controller = controller;
@@ -31,7 +32,7 @@ public class ClientThread extends Thread {
 
     public ClientThread(Socket socket){
 
-        this(socket, new ControllerLobby());
+        this(socket, new LobbyController());
 
     }
 
@@ -40,16 +41,22 @@ public class ClientThread extends Thread {
             DataInputStream in = new DataInputStream(this.socket.getInputStream());
             DataOutputStream out = new DataOutputStream(this.socket.getOutputStream());
 
+            ManagerConrollers manager = new ManagerConrollers();
+
             String jsonString;
             while(true){
 
                 jsonString = in.readUTF();
                 Message messageIn = getMessage(jsonString);
 
+                if(user != null) {
+                    messageIn.checkIntegeryData(user.getName());
+                }
+
+                controller = manager.getController(user);
                 Message messageOut = controller.handleMessage(messageIn);
 
                 fillFieldUser(messageOut.getName());
-                checkStatusGame();
 
                 jsonString = getJsonString(messageOut);
                 out.writeUTF(jsonString);
@@ -68,32 +75,23 @@ public class ClientThread extends Thread {
         JSONParser jsonParser = new JSONParser();
         JSONObject json = (JSONObject) jsonParser.parse(jsonString);
 
-        Message message = new Message(json);
+        ManagerMessages manager = new ManagerMessages(json);
+
+        Message message = manager.getMessage();
 
         return message;
+
     }
 
     private void fillFieldUser(String name){
 
-        User user = RegistryAllUsers.getInstance().getUser(name);
         if(this.user == null){
+
+            User user = RegistryAllUsers.getInstance().getUser(name);
             this.user = user;
+
         }
 
-    }
-
-    private boolean checkStatusGame(){
-
-        Controller controllerGame = RegistryGames.getInstance().getControllerGame(this.user);
-        if(controllerGame != null){
-            this.controller = controllerGame;
-            return true;
-        } else if(controller == null){
-            this.controller = new ControllerLobby();
-            return false;
-        }
-
-        return false;
     }
 
     private String getJsonString(Message message){

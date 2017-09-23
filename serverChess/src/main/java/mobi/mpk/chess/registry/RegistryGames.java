@@ -1,8 +1,8 @@
 package mobi.mpk.chess.registry;
 
 import mobi.mpk.chess.User;
-import mobi.mpk.chess.controller.Controller;
-import mobi.mpk.chess.controller.ControllerGame;
+import mobi.mpk.chess.controller.Controllable;
+import mobi.mpk.chess.controller.GameController;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentMap;
 public class RegistryGames {
 
     private static volatile RegistryGames instance;
-    private ConcurrentMap<User, Controller> games;
+    private ConcurrentMap<User, Controllable> games;
 
     private RegistryGames(){
 
-        games = new ConcurrentHashMap<User, Controller>();
+        games = new ConcurrentHashMap<User, Controllable>();
 
     }
 
@@ -31,13 +31,13 @@ public class RegistryGames {
         return localInstance;
     }
 
-    public void addControllerGame(User user, ControllerGame controllerGame){
+    public void addControllerGame(User user, GameController controllerGame){
 
         games.putIfAbsent(user, controllerGame);
 
     }
 
-    public Controller getControllerGame(User user){
+    public Controllable getControllerGame(User user){
 
         return games.get(user);
 
