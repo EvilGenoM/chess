@@ -1,7 +1,7 @@
 package mobi.mpk.chess.command;
 
 import mobi.mpk.chess.User;
-import mobi.mpk.chess.controller.ControllerGame;
+import mobi.mpk.chess.controller.GameController;
 import mobi.mpk.chess.registry.RegistryAllUsers;
 import mobi.mpk.chess.registry.RegistryGames;
 
@@ -26,7 +26,7 @@ public class JoinPlayerCommand implements Command {
         if(this.user1 == null || this.user2 == null){
             return "Error";
         } else {
-            ControllerGame controllerGame = new ControllerGame(user1, user2);
+            GameController controllerGame = new GameController(user1, user2);
             RegistryGames.getInstance().addControllerGame(user1, controllerGame);
             RegistryGames.getInstance().addControllerGame(user2, controllerGame);
             return "Connect";
