@@ -51,13 +51,15 @@ public class CommandTests {
         User user2 = new User();
         user2.addName("A2");
 
-        RegistryAllUsers.getInstance().addUser(user1);
-        RegistryAllUsers.getInstance().addUser(user2);
+        RegistryAllUsers registry = RegistryAllUsers.getInstance();
+        registry.clear();
+        registry.addUser(user1);
+        registry.addUser(user2);
 
         Command command = new ShowUsersAppCommand();
         String result = command.execute();
 
-        String resultTrue = "List all users:\nA1\nA2\nJack2\nSam";
+        String resultTrue = "List all users:\nA1\nA2";
         System.out.println(result);
 
         assertEquals(result, resultTrue);

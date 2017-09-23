@@ -1,24 +1,28 @@
-import mobi.mpk.chess.Message;
+import mobi.mpk.chess.message.ManagerMessages;
+import mobi.mpk.chess.message.Message;
+import mobi.mpk.chess.message.TypeMessage;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-public class MessageTest {
+public class MessageCommandTest {
 
     @Test
-    public void testMessage(){
+    public void testMessageManager(){
 
         JSONObject json = new JSONObject();
 
         json.put("name", "Jack");
         json.put("text", "Test");
-        json.put("date", new Date());
+        json.put("date", Calendar.getInstance());
+        json.put("date", TypeMessage.command);
 
-        Message message = new Message(json);
-        System.out.println(message.getDate());
+        ManagerMessages manager = new ManagerMessages(json);
+        Message message = manager.getMessage();
 
         assertEquals(message.getName(), "Jack");
         assertEquals(message.getText(), "Test");
@@ -27,7 +31,8 @@ public class MessageTest {
     @Test
     public void testMessageNullJSON(){
 
-        Message message = new Message(null);
+        ManagerMessages manager = new ManagerMessages(null);
+        Message message = manager.getMessage();
 
         assertEquals(message.getName(), "Server");
         assertEquals(message.getText(), "Error");
@@ -41,7 +46,8 @@ public class MessageTest {
         json.put("name", "Jack");
         json.put("date", new Date());
 
-        Message message = new Message(json);
+        ManagerMessages manager = new ManagerMessages(json);
+        Message message = manager.getMessage();
 
         System.out.println(message.getText());
 
