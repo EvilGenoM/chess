@@ -1,8 +1,8 @@
 package mobi.mpk.chess.controller;
 
-import mobi.mpk.chess.Message;
+import mobi.mpk.chess.message.Message;
 
-public interface Controller {
+public interface Controllable {
 
     Message handleMessage(Message message);
 

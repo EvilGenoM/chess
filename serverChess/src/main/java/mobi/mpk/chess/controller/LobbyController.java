@@ -1,14 +1,15 @@
 package mobi.mpk.chess.controller;
 
-import mobi.mpk.chess.Message;
+import mobi.mpk.chess.message.Message;
+import mobi.mpk.chess.message.MessageCommand;
 import mobi.mpk.chess.User;
 import mobi.mpk.chess.command.*;
-import mobi.mpk.chess.registry.Registry;
 import mobi.mpk.chess.registry.RegistryAllUsers;
 
+import java.util.Calendar;
 import java.util.Date;
 
-public class ControllerLobby implements Controller{
+public class LobbyController implements Controllable {
 
     @Override
     public Message handleMessage(Message message){
